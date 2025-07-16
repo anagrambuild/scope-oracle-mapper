@@ -27,10 +27,6 @@ fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
         &program_id,
     );
-    println!("[DEBUG] program_id: {}", program_id);
-    println!("[DEBUG] state_pda: {}", state_pda);
-    println!("[DEBUG] bump: {}", bump);
-    println!("[DEBUG] fee_payer pubkey: {}", fee_payer.pubkey());
     (svm, fee_payer, program_id, state_pda, bump)
 }
 

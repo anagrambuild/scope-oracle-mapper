@@ -38,14 +38,6 @@ impl ScopeMappingRegistry {
     pub fn validate_pda(bump: u8, pda: &Pubkey, owner: &Pubkey) -> Result<(), ProgramError> {
         let seed_with_bump = &[Self::SEED.as_bytes(), owner, &[bump]];
         let derived = pubkey::create_program_address(seed_with_bump, &crate::ID)?;
-        pinocchio::msg!(
-            "[DEBUG] validate_pda: bump={:?}, pda={:?}, owner={:?}, derived={:?}, program_id={:?}",
-            bump,
-            pda,
-            owner,
-            derived,
-            crate::ID
-        );
         if derived != *pda {
             return Err(MappingProgramError::PdaMismatch.into());
         }
