@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install Solana SBF tools
+        run: |
+          bash -c "$(curl -sSfL https://release.solana.com/v1.17.16/install)"
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+      - name: Add cargo-sbf
+        run: cargo install --git https://github.com/solana-labs/cargo-build-sbf.git
+      - name: Build with cargo build-sbf
+        run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          cargo build-sbf
+      - name: Run tests
+        run: cargo test -- --nocapture
