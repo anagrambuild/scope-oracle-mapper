@@ -19,14 +19,18 @@ fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
     let mut svm = LiteSVM::new();
     let fee_payer = Keypair::read_from_file("./tests/test-wallet.json").unwrap();
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
-    let program_kp = Keypair::read_from_file("./target/deploy/scope_mapping-keypair.json").unwrap();
-    let program_id = program_kp.pubkey();
+
+    let program_id = Pubkey::from_str("4Yg8cVpMUqbvyb9qF13mZarqvNCdDC9uVJeeDvSCLVSK").unwrap();
     svm.add_program_from_file(program_id, "./target/deploy/scope_mapping.so")
         .unwrap();
     let (state_pda, bump) = Pubkey::find_program_address(
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
         &program_id,
     );
+    println!("[DEBUG] program_id: {}", program_id);
+    println!("[DEBUG] state_pda: {}", state_pda);
+    println!("[DEBUG] bump: {}", bump);
+    println!("[DEBUG] fee_payer pubkey: {}", fee_payer.pubkey());
     (svm, fee_payer, program_id, state_pda, bump)
 }
 

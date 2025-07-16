@@ -7,10 +7,10 @@ pub use add_mapping::*;
 pub use initialize::*;
 use pinocchio_pubkey::pubkey;
 
-#[cfg(not(test))]
-const OWNER_PUB_KEY: Pubkey = pubkey!("3hPmQsxMb4buU1PozSqMS7wni14JoP5kmPA9UTpJnerb");
-#[cfg(test)]
+#[cfg(feature = "test-owner")]
 const OWNER_PUB_KEY: Pubkey = pubkey!("aaaykznHWqbsb643Uc6xeDgtmng3rh22jNfNYP5YuLq");
+#[cfg(not(feature = "test-owner"))]
+const OWNER_PUB_KEY: Pubkey = pubkey!("3hPmQsxMb4buU1PozSqMS7wni14JoP5kmPA9UTpJnerb");
 
 #[repr(u8)]
 pub enum InstructionSet {
