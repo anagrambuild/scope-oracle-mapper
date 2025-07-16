@@ -23,11 +23,11 @@ fn process_instruction(
 
     match InstructionSet::try_from(ix_disc)? {
         InstructionSet::InitializeState => {
-            msg!("Ix:0");
+            msg!("Ix:0 -> InitializeState");
             instruction::process_initialize_state(accounts, instruction_data)
         }
         InstructionSet::AddMapping => {
-            msg!("Ix:1");
+            msg!("Ix:1 -> AddMapping");
             instruction::process_add_mapping(accounts, instruction_data)
         }
     }
