@@ -1,19 +1,18 @@
 use pinocchio::{
     account_info::AccountInfo,
     instruction::{Seed, Signer},
-    msg,
     program_error::ProgramError,
     sysvars::rent::Rent,
     ProgramResult,
 };
-
 use pinocchio_system::instructions::CreateAccount;
 
 use crate::{
     error::MappingProgramError,
-    instruction::IntoBytes,
+    instruction::{IntoBytes, OWNER_PUB_KEY},
     state::{
         scope_mapping_registry::ScopeMappingRegistry,
+        try_from_account_info_mut,
         utils::{load_ix_data, DataLen},
     },
 };
@@ -52,7 +51,8 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
 
     let ix_data = unsafe { load_ix_data::<InitializeRegistryIxData>(data)? };
 
-    if ix_data.owner.ne(payer_acc.key()) {
+    // Hardcoded authority check
+    if payer_acc.key().as_ref() != OWNER_PUB_KEY || ix_data.owner != OWNER_PUB_KEY {
         return Err(MappingProgramError::InvalidOwner.into());
     }
 
@@ -69,8 +69,6 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     ];
     let signers = [Signer::from(&signer_seeds[..])];
 
-    msg!("signer_seeds");
-
     // Create the account
     CreateAccount {
         from: payer_acc,
@@ -82,7 +80,13 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     .invoke_signed(&signers)?;
 
     // Initialize the account data using the proper method
-    ScopeMappingRegistry::initialize(state_acc, &ix_data)?;
+    let scope_reg_data = unsafe { try_from_account_info_mut::<ScopeMappingRegistry>(state_acc) }?;
+
+    scope_reg_data.owner = ix_data.owner;
+    scope_reg_data.total_mappings = 0;
+    scope_reg_data.version = 0;
+    scope_reg_data.bump = ix_data.bump;
+    scope_reg_data.is_initialized = 1;
 
     Ok(())
 }

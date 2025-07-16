@@ -1,10 +1,13 @@
-use pinocchio::program_error::ProgramError;
+use pinocchio::{program_error::ProgramError, pubkey::Pubkey};
 
 pub mod add_mapping;
 pub mod initialize;
 
 pub use add_mapping::*;
 pub use initialize::*;
+use pinocchio_pubkey::pubkey;
+
+const OWNER_PUB_KEY: Pubkey = pubkey!("3hPmQsxMb4buU1PozSqMS7wni14JoP5kmPA9UTpJnerb");
 
 #[repr(u8)]
 pub enum InstructionSet {

@@ -3,19 +3,13 @@ extern crate alloc;
 use super::utils::{DataLen, Initialized};
 use alloc::vec::Vec;
 use pinocchio::{
-    account_info::AccountInfo,
-    msg,
     program_error::ProgramError,
     pubkey::{self, Pubkey},
     ProgramResult,
 };
 
+use crate::error::MappingProgramError;
 use crate::state::mint_mapping::MintMapping;
-use crate::{
-    error::MappingProgramError,
-    instruction::{AddMappingIxData, InitializeRegistryIxData},
-    state::try_from_account_info_mut,
-};
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, shank::ShankAccount)]
@@ -45,41 +39,17 @@ impl ScopeMappingRegistry {
         let seed_with_bump = &[Self::SEED.as_bytes(), owner, &[bump]];
         let derived = pubkey::create_program_address(seed_with_bump, &crate::ID)?;
         if derived != *pda {
-            msg!("bump: {:?}", bump);
-            msg!("pda: {:?}", pda);
-            msg!("derived: {:?}", derived);
             return Err(MappingProgramError::PdaMismatch.into());
         }
-        msg!("derived: {:?}", derived);
         Ok(())
     }
 
-    pub fn initialize(
-        my_state_acc: &AccountInfo,
-        ix_data: &InitializeRegistryIxData,
-    ) -> ProgramResult {
-        let owner = unsafe { my_state_acc.owner() };
-        msg!("my state owner: {:?}", owner);
-        let my_state = unsafe { try_from_account_info_mut::<ScopeMappingRegistry>(my_state_acc) }?;
-
-        my_state.owner = ix_data.owner;
-        my_state.total_mappings = 0;
-        my_state.version = 0;
-        my_state.bump = ix_data.bump;
-        my_state.is_initialized = 1;
-
-        Ok(())
-    }
-
-    pub fn add(&mut self, _ix_data: &AddMappingIxData) -> ProgramResult {
+    pub fn add(&mut self) -> ProgramResult {
         if !self.is_initialized() {
             return Err(ProgramError::InvalidAccountData);
         }
-
-        // For now, we'll just increment the counter
-        // In a real implementation, you'd need to handle the actual storage of mappings
-        // This might involve reallocating the account or using a different storage strategy
         self.total_mappings += 1;
+        self.version += 1;
         Ok(())
     }
 

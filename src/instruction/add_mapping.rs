@@ -8,7 +8,7 @@ use pinocchio_system::instructions::Transfer;
 
 use crate::{
     error::MappingProgramError,
-    instruction::IntoBytes,
+    instruction::{IntoBytes, OWNER_PUB_KEY},
     state::{
         mint_mapping::MintMapping,
         scope_mapping_registry::ScopeMappingRegistry,
@@ -38,12 +38,18 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
         return Err(ProgramError::NotEnoughAccountKeys);
     };
 
+    // Hardcoded authority check
+    if payer_acc.key().as_ref() != OWNER_PUB_KEY {
+        return Err(MappingProgramError::InvalidOwner.into());
+    }
+
     if !payer_acc.is_signer() {
         return Err(ProgramError::MissingRequiredSignature);
     }
+    let end_offset = state_acc.data_len();
 
     let account_size = core::alloc::Layout::from_size_align(
-        state_acc.data_len() + MintMapping::LEN,
+        end_offset + MintMapping::LEN,
         core::mem::size_of::<u64>(),
     )
     .map_err(|_| ProgramError::InvalidAccountData)?
@@ -84,12 +90,16 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
     // mapping.set_pyth_account(...);
     // mapping.set_switch_board(...);
 
-    registry.total_mappings += 1;
-    registry.version += 1;
+    registry.add()?;
+
+    // Write the updated registry back to account data
+    let reg_bytes = registry.to_bytes();
+    acc_data[..ScopeMappingRegistry::LEN].copy_from_slice(&reg_bytes);
 
     let mapping_bytes = mapping.to_bytes();
-    acc_data[ScopeMappingRegistry::LEN..ScopeMappingRegistry::LEN + MintMapping::LEN]
-        .copy_from_slice(&mapping_bytes);
+    let mapping_offset =
+        ScopeMappingRegistry::LEN + (registry.total_mappings as usize - 1) * MintMapping::LEN;
+    acc_data[mapping_offset..mapping_offset + MintMapping::LEN].copy_from_slice(&mapping_bytes);
 
     Ok(())
 }
