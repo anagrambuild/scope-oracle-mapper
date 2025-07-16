@@ -17,7 +17,7 @@ use std::str::FromStr;
 
 fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
     let mut svm = LiteSVM::new();
-    let fee_payer = Keypair::read_from_file("/Users/santhosh/.config/solana/id.json").unwrap();
+    let fee_payer = Keypair::read_from_file("./tests/test-wallet.json").unwrap();
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
     let program_kp = Keypair::read_from_file("./target/deploy/scope_mapping-keypair.json").unwrap();
     let program_id = program_kp.pubkey();
@@ -281,41 +281,4 @@ fn test_add_multiple_mappings() {
     }
     let reg = get_registry(&svm, &state_pda);
     assert_eq!(reg.total_mappings, 3);
-    // Print raw account data for debugging
-    let data = svm.get_account(&state_pda).unwrap().data;
-    println!("raw account data: {:?}", &data[..]);
-}
-
-pub fn print_mapping(svm: &LiteSVM, state_pda: &Pubkey) {
-    let data = svm.get_account(&state_pda).unwrap().data;
-    let scope_mapping_registry =
-        ScopeMappingRegistry::from_slice(&data[..ScopeMappingRegistry::LEN]).unwrap();
-
-    println!("scope_mapping_registry: {:?}", scope_mapping_registry);
-
-    let offset = ScopeMappingRegistry::LEN;
-    let mapping_data = &data[offset..offset + MintMapping::LEN];
-    // SAFETY: Copy to a properly aligned buffer before transmuting
-    let mut mapping_buf = [0u8; MintMapping::LEN];
-    mapping_buf.copy_from_slice(mapping_data);
-    let mapping = MintMapping::from_bytes(&mapping_buf).unwrap();
-    println!("mapping mint: {:?}", Pubkey::new_from_array(mapping.mint));
-    println!("mapping price_chain: {:?}", mapping.price_chain);
-    println!("mapping decimals: {:?}", mapping.decimals);
-    println!("mapping is_active: {:?}", mapping.is_active);
-    println!("mapping pyth_account: {:?}", mapping.pyth_account);
-    println!("mapping switch_board: {:?}", mapping.switch_board);
-
-    let data = svm.get_account(&state_pda).unwrap().data;
-    let mapping_data = &data[offset..offset + MintMapping::LEN];
-
-    let mint_bytes: [u8; 32] = mapping_data[..32].try_into().unwrap();
-    let mint_pubkey = Pubkey::new_from_array(mint_bytes);
-    println!("mint_pubkey: {:?}", mint_pubkey);
-
-    let mint_pubkey_2: [u8; 32] = data[offset + MintMapping::LEN..offset + MintMapping::LEN + 32]
-        .try_into()
-        .unwrap();
-    let mint_pubkey_2 = Pubkey::new_from_array(mint_pubkey_2);
-    println!("mint_pubkey_2: {:?}", mint_pubkey_2);
 }
