@@ -11,6 +11,8 @@ use pinocchio::{
 use crate::error::MappingProgramError;
 use crate::state::mint_mapping::MintMapping;
 
+pub const MAX_MAPPINGS: u32 = 512;
+
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, shank::ShankAccount)]
 pub struct ScopeMappingRegistry {
@@ -19,7 +21,6 @@ pub struct ScopeMappingRegistry {
     pub total_mappings: u32,
     pub version: u8,
     pub bump: u8,
-    // Remove the fixed array and we'll handle mappings separately
 }
 
 impl DataLen for ScopeMappingRegistry {
@@ -48,28 +49,26 @@ impl ScopeMappingRegistry {
         if !self.is_initialized() {
             return Err(ProgramError::InvalidAccountData);
         }
+        if self.total_mappings >= MAX_MAPPINGS as u32 {
+            return Err(MappingProgramError::MaxMappingsReached.into());
+        }
         self.total_mappings += 1;
         self.version += 1;
         Ok(())
     }
 
-    /// Load a ScopeMappingRegistry from a byte array
     pub fn from_bytes(bytes: &[u8; Self::LEN]) -> Result<Self, ProgramError> {
         if bytes.len() != Self::LEN {
             return Err(ProgramError::InvalidAccountData);
         }
 
-        // SAFETY: We've verified the byte length matches the struct size
-        // and we're using #[repr(C)] which guarantees stable memory layout
         let mapping = unsafe { *(bytes.as_ptr() as *const Self) };
         Ok(mapping)
     }
 
-    /// Convert a ScopeMappingRegistry to a byte array
     pub fn to_bytes(&self) -> [u8; Self::LEN] {
         let mut bytes = [0u8; Self::LEN];
 
-        // SAFETY: We're using #[repr(C)] which guarantees stable memory layout
         unsafe {
             core::ptr::copy_nonoverlapping(
                 self as *const Self as *const u8,
@@ -80,24 +79,20 @@ impl ScopeMappingRegistry {
         bytes
     }
 
-    /// Load a ScopeMappingRegistry from a slice of bytes
     pub fn from_slice(bytes: &[u8]) -> Result<Self, ProgramError> {
         if bytes.len() != Self::LEN {
             return Err(ProgramError::InvalidAccountData);
         }
 
-        // SAFETY: We've verified the byte length matches the struct size
         let mapping = unsafe { *(bytes.as_ptr() as *const Self) };
         Ok(mapping)
     }
 
-    /// Convert a ScopeMappingRegistry to a byte vector
     pub fn to_vec(&self) -> Vec<u8> {
         let bytes = self.to_bytes();
         bytes.to_vec()
     }
 
-    /// Given the full account data, split into registry and mappings vector
     pub fn from_account_data(data: &[u8]) -> Result<Self, ProgramError> {
         if data.len() < Self::LEN {
             return Err(ProgramError::InvalidAccountData);
@@ -106,7 +101,6 @@ impl ScopeMappingRegistry {
         Ok(registry)
     }
 
-    /// Write the registry and mappings vector to the account data
     pub fn to_account_data(
         registry: &Self,
         mapping: &MintMapping,
@@ -119,7 +113,6 @@ impl ScopeMappingRegistry {
         Ok(())
     }
 
-    /// Get the mappings slice from the account data
     pub fn get_mappings_slice(data: &[u8]) -> Result<&[u8], ProgramError> {
         if data.len() < Self::LEN {
             return Err(ProgramError::InvalidAccountData);

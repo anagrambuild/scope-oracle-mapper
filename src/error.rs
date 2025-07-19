@@ -10,6 +10,8 @@ pub enum MappingProgramError {
     PdaMismatch,
     // Invalid Owner
     InvalidOwner,
+    // Max Mappings Reached
+    MaxMappingsReached,
 }
 
 impl From<MappingProgramError> for ProgramError {

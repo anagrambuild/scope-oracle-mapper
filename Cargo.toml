@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-pinocchio = { version = "=0.8.1", features = ["std"] }
+pinocchio = "0.8.1"
 pinocchio-pubkey = "0.2.4"
 pinocchio-system = "0.2.3"
 shank = "0.4.3"

@@ -1,3 +1,5 @@
+#![no_std]
+
 #[cfg(not(feature = "no-entrypoint"))]
 mod entrypoint;
 

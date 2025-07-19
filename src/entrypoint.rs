@@ -2,12 +2,14 @@
 
 use crate::instruction::{self, InstructionSet};
 use pinocchio::{
-    account_info::AccountInfo, default_panic_handler, msg, program_entrypoint,
+    account_info::AccountInfo, default_panic_handler, msg, no_allocator, program_entrypoint,
     program_error::ProgramError, pubkey::Pubkey, ProgramResult,
 };
 
 // This is the entrypoint for the program.
 program_entrypoint!(process_instruction);
+//Do not allocate memory.
+no_allocator!();
 // Use the no_std panic handler.
 default_panic_handler!();
 

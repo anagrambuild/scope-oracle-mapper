@@ -83,14 +83,14 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
         return Err(MappingProgramError::InvalidOwner.into());
     }
 
+    registry.add()?;
+
     let ix_data = unsafe { load_ix_data::<AddMappingIxData>(data)? };
 
     let mapping = ix_data.mapping;
-    // If you need to set pyth_account or switch_board, use the helpers:
+    // use the helpers for pyth_account and switch_board:
     // mapping.set_pyth_account(...);
     // mapping.set_switch_board(...);
-
-    registry.add()?;
 
     // Write the updated registry back to account data
     let reg_bytes = registry.to_bytes();
