@@ -12,6 +12,12 @@ pub enum MappingProgramError {
     InvalidOwner,
     // Max Mappings Reached
     MaxMappingsReached,
+    // Invalid Mapping Size
+    InvalidMappingSize,
+    // Mint Not Found
+    MintNotFound,
+    // Invalid Account Data
+    InvalidAccountData,
 }
 
 impl From<MappingProgramError> for ProgramError {

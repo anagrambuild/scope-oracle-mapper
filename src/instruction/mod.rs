@@ -1,9 +1,11 @@
 use pinocchio::{program_error::ProgramError, pubkey::Pubkey};
 
 pub mod add_mapping;
+pub mod close;
 pub mod initialize;
 
 pub use add_mapping::*;
+pub use close::*;
 pub use initialize::*;
 use pinocchio_pubkey::pubkey;
 
@@ -16,6 +18,7 @@ const OWNER_PUB_KEY: Pubkey = pubkey!("3hPmQsxMb4buU1PozSqMS7wni14JoP5kmPA9UTpJn
 pub enum InstructionSet {
     InitializeState,
     AddMapping,
+    CloseMapping,
 }
 
 pub trait IntoBytes {
@@ -30,6 +33,7 @@ impl TryFrom<&u8> for InstructionSet {
         match *value {
             0 => Ok(InstructionSet::InitializeState),
             1 => Ok(InstructionSet::AddMapping),
+            2 => Ok(InstructionSet::CloseMapping),
             _ => Err(ProgramError::InvalidInstructionData),
         }
     }
@@ -48,5 +52,8 @@ mod idl_gen {
         #[account(0, writable, signer, name = "payer_acc", desc = "Fee payer account")]
         #[account(1, writable, name = "state_acc", desc = "State account")]
         AddMapping,
+        #[account(0, writable, signer, name = "payer_acc", desc = "Fee payer account")]
+        #[account(1, writable, name = "state_acc", desc = "State account")]
+        CloseMapping,
     }
 }

@@ -59,7 +59,7 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     let pda_bump_bytes = [ix_data.bump];
 
     // Validate the PDA
-    ScopeMappingRegistry::validate_pda(ix_data.bump, state_acc.key(), &payer_acc.key())?;
+    ScopeMappingRegistry::validate_pda(ix_data.bump, state_acc.key(), payer_acc.key())?;
 
     // Signer seeds
     let signer_seeds = [

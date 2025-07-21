@@ -11,15 +11,16 @@ use pinocchio::{
 use crate::error::MappingProgramError;
 use crate::state::mint_mapping::MintMapping;
 
-pub const MAX_MAPPINGS: u32 = 512;
+pub const MAX_MAPPINGS: u16 = 512;
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, shank::ShankAccount)]
 pub struct ScopeMappingRegistry {
     pub is_initialized: u8,
     pub owner: [u8; 32],
-    pub total_mappings: u32,
+    pub total_mappings: u16,
     pub version: u8,
+    pub last_mapping_offset: u16,
     pub bump: u8,
 }
 
@@ -45,15 +46,26 @@ impl ScopeMappingRegistry {
         Ok(())
     }
 
-    pub fn add(&mut self) -> ProgramResult {
+    pub fn add(&mut self, mapping_size: u16) -> ProgramResult {
         if !self.is_initialized() {
             return Err(ProgramError::InvalidAccountData);
         }
-        if self.total_mappings >= MAX_MAPPINGS as u32 {
+        if self.total_mappings >= MAX_MAPPINGS {
             return Err(MappingProgramError::MaxMappingsReached.into());
         }
         self.total_mappings += 1;
         self.version += 1;
+        self.last_mapping_offset += mapping_size;
+        Ok(())
+    }
+
+    pub fn subtract_mapping(&mut self, mapping_size: u16) -> ProgramResult {
+        if !self.is_initialized() {
+            return Err(ProgramError::InvalidAccountData);
+        }
+        self.total_mappings -= 1;
+        self.version += 1;
+        self.last_mapping_offset -= mapping_size;
         Ok(())
     }
 
@@ -109,7 +121,7 @@ impl ScopeMappingRegistry {
         let reg_bytes = registry.to_bytes();
         data[..Self::LEN].copy_from_slice(&reg_bytes);
         let mapping_bytes = mapping.to_bytes();
-        data[Self::LEN..Self::LEN + MintMapping::LEN].copy_from_slice(&mapping_bytes);
+        data[Self::LEN..Self::LEN + mapping_bytes.len()].copy_from_slice(&mapping_bytes);
         Ok(())
     }
 

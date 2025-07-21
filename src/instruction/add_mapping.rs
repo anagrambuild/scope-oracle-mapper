@@ -48,16 +48,21 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
     }
     let end_offset = state_acc.data_len();
 
-    let account_size = core::alloc::Layout::from_size_align(
-        end_offset + MintMapping::LEN,
+    let ix_data = unsafe { load_ix_data::<AddMappingIxData>(data)? };
+
+    let mapping = ix_data.mapping;
+    let mapping_size = mapping.serialized_size();
+
+    let new_account_size = core::alloc::Layout::from_size_align(
+        end_offset + mapping_size as usize,
         core::mem::size_of::<u64>(),
     )
-    .map_err(|_| ProgramError::InvalidAccountData)?
+    .map_err(|_| MappingProgramError::InvalidAccountData)?
     .pad_to_align()
     .size();
-    state_acc.realloc(account_size, false)?;
-    let cost = Rent::get()?.minimum_balance(account_size);
 
+    state_acc.realloc(new_account_size, false)?;
+    let cost = Rent::get()?.minimum_balance(new_account_size);
     if cost > 0 {
         Transfer {
             from: payer_acc,
@@ -83,23 +88,16 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
         return Err(MappingProgramError::InvalidOwner.into());
     }
 
-    registry.add()?;
-
-    let ix_data = unsafe { load_ix_data::<AddMappingIxData>(data)? };
-
-    let mapping = ix_data.mapping;
-    // use the helpers for pyth_account and switch_board:
-    // mapping.set_pyth_account(...);
-    // mapping.set_switch_board(...);
+    let old_last_mapping_offset = registry.last_mapping_offset + ScopeMappingRegistry::LEN as u16;
+    registry.add(mapping_size)?;
 
     // Write the updated registry back to account data
     let reg_bytes = registry.to_bytes();
     acc_data[..ScopeMappingRegistry::LEN].copy_from_slice(&reg_bytes);
 
     let mapping_bytes = mapping.to_bytes();
-    let mapping_offset =
-        ScopeMappingRegistry::LEN + (registry.total_mappings as usize - 1) * MintMapping::LEN;
-    acc_data[mapping_offset..mapping_offset + MintMapping::LEN].copy_from_slice(&mapping_bytes);
+    acc_data[old_last_mapping_offset as usize..(old_last_mapping_offset + mapping_size) as usize]
+        .copy_from_slice(&mapping_bytes[..mapping_size as usize]);
 
     Ok(())
 }
