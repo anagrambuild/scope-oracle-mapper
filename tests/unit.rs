@@ -18,14 +18,7 @@ use std::str::FromStr;
 fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
     let mut svm = LiteSVM::new();
     let fee_payer = Keypair::read_from_file("./tests/test-wallet.json").unwrap();
-    let fee_payer_bytes = [
-        218, 201, 131, 153, 239, 193, 233, 36, 236, 30, 49, 16, 85, 39, 174, 123, 161, 166, 237,
-        165, 139, 193, 194, 59, 178, 99, 131, 117, 146, 234, 169, 180, 40, 16, 88, 245, 130, 119,
-        100, 222, 3, 231, 239, 92, 174, 153, 218, 163, 93, 246, 179, 233, 74, 242, 242, 124, 223,
-        252, 34, 181, 118, 198, 24, 232,
-    ];
 
-    let fee_payer = Keypair::from_bytes(&fee_payer_bytes).unwrap();
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
 
     let program_id = Pubkey::from_str("HeyqQW2AYdG9F8d25UZYTwV6SjEXbwwxngSrhem1D1Ww").unwrap();
