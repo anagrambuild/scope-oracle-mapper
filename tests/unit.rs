@@ -18,9 +18,17 @@ use std::str::FromStr;
 fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
     let mut svm = LiteSVM::new();
     let fee_payer = Keypair::read_from_file("./tests/test-wallet.json").unwrap();
+    let fee_payer_bytes = [
+        218, 201, 131, 153, 239, 193, 233, 36, 236, 30, 49, 16, 85, 39, 174, 123, 161, 166, 237,
+        165, 139, 193, 194, 59, 178, 99, 131, 117, 146, 234, 169, 180, 40, 16, 88, 245, 130, 119,
+        100, 222, 3, 231, 239, 92, 174, 153, 218, 163, 93, 246, 179, 233, 74, 242, 242, 124, 223,
+        252, 34, 181, 118, 198, 24, 232,
+    ];
+
+    let fee_payer = Keypair::from_bytes(&fee_payer_bytes).unwrap();
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
 
-    let program_id = Pubkey::from_str("Fhjf6d3Dj5Y4a5pGq5AGXgZ5ARasoob1a6WF1X2CaN2o").unwrap();
+    let program_id = Pubkey::from_str("HeyqQW2AYdG9F8d25UZYTwV6SjEXbwwxngSrhem1D1Ww").unwrap();
     svm.add_program_from_file(program_id, "./target/deploy/scope_mapping.so")
         .unwrap();
     let (state_pda, bump) = Pubkey::find_program_address(
@@ -40,7 +48,7 @@ fn create_initialize_registry_ix(
     let binding = InitializeRegistryIxData { owner, bump };
     let ix_data = binding.into_bytes().unwrap();
     let mut ix_data_with_discriminator = vec![0];
-    ix_data_with_discriminator.extend_from_slice(&ix_data);
+    ix_data_with_discriminator.extend_from_slice(ix_data);
     Instruction {
         program_id,
         accounts: vec![
@@ -61,7 +69,7 @@ fn create_add_mapping_ix(
 ) -> Instruction {
     let add_mapping_ix_data = AddMappingIxData { mapping };
     let mut ix_data_with_discriminator = vec![1];
-    ix_data_with_discriminator.extend_from_slice(&add_mapping_ix_data.into_bytes().unwrap());
+    ix_data_with_discriminator.extend_from_slice(add_mapping_ix_data.into_bytes().unwrap());
     let ix_data: [u8; 1 + AddMappingIxData::LEN] = ix_data_with_discriminator.try_into().unwrap();
     Instruction {
         program_id,
@@ -71,7 +79,7 @@ fn create_add_mapping_ix(
             AccountMeta::new_readonly(rent::id(), false),
             AccountMeta::new_readonly(system_program::id(), false),
         ],
-        data: ix_data.try_into().unwrap(),
+        data: ix_data.into(),
     }
 }
 
@@ -95,7 +103,7 @@ fn create_close_mapping_ix(
             AccountMeta::new_readonly(rent::id(), false),
             AccountMeta::new_readonly(system_program::id(), false),
         ],
-        data: ix_data.try_into().unwrap(),
+        data: ix_data.into(),
     }
 }
 
@@ -106,11 +114,8 @@ fn get_registry(svm: &LiteSVM, state_pda: &Pubkey) -> ScopeMappingRegistry {
 
 fn get_mapping(svm: &LiteSVM, state_pda: &Pubkey, index: usize) -> MintMapping {
     let data = svm.get_account(state_pda).unwrap().data;
-
-    println!("data: {:?}", data);
     // Calculate the starting offset for this mapping
     let mut current_offset = ScopeMappingRegistry::LEN;
-
     // Skip previous mappings to find the start of this mapping
     for i in 0..index {
         if current_offset + 35 > data.len() {
@@ -120,16 +125,13 @@ fn get_mapping(svm: &LiteSVM, state_pda: &Pubkey, index: usize) -> MintMapping {
         let mapping_offset = data[current_offset + 32] as usize;
         current_offset += mapping_offset;
     }
-
     // Now read the current mapping
     if current_offset + 35 > data.len() {
         panic!("Mapping index {} not found", index);
     }
-
     // Read the offset byte to determine the actual size of this mapping
     let mapping_size = data[current_offset + 32] as usize;
     let mapping_data = &data[current_offset..current_offset + mapping_size];
-
     MintMapping::from_bytes(mapping_data).unwrap()
 }
 
@@ -149,7 +151,6 @@ fn test_initialize_and_add_mapping() {
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     svm.send_transaction(tx).unwrap();
     let reg = get_registry(&svm, &state_pda);
-    println!("reg: {:?}", reg);
     assert_eq!(reg.owner, fee_payer.pubkey().to_bytes());
     assert_eq!(reg.total_mappings, 0);
     assert_eq!(reg.is_initialized, 1);
@@ -173,10 +174,6 @@ fn test_initialize_and_add_mapping() {
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     let result = svm.send_transaction(tx);
-    // println!("result: {:?}", result);
-    let reg = get_registry(&svm, &state_pda);
-    println!("reg: {:?}", reg);
-
     assert!(result.is_ok());
     let reg = get_registry(&svm, &state_pda);
     assert_eq!(reg.total_mappings, 1);
@@ -314,10 +311,7 @@ fn test_add_multiple_mappings() {
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     svm.send_transaction(tx).unwrap();
-
-    println!("initial registry success");
     // Add multiple mappings
-    println!("ScopeMappingRegistry::LEN = {}", ScopeMappingRegistry::LEN);
     for i in 0..3 {
         let mut mint_mapping = MintMapping::default();
         mint_mapping.mint = [i as u8; 32];
@@ -329,7 +323,6 @@ fn test_add_multiple_mappings() {
         let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
         svm.send_transaction(tx).unwrap();
         let mapping = get_mapping(&svm, &state_pda, i as usize);
-        println!("mapping[{}].mint = {:?}", i, mapping.mint);
         assert_eq!(mapping.mint, [i as u8; 32]);
         assert_eq!(mapping.decimals, i as u8);
     }
@@ -352,26 +345,13 @@ fn test_add_and_remove_middle_mapping() {
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     svm.send_transaction(tx).unwrap();
-
     // Add 3 mappings
     let mut mints = [[0u8; 32]; 3];
     for i in 0..3 {
         mints[i][0] = i as u8 + 1; // Unique first byte for each mint
-        let scope_details = if i == 1 {
-            Some([i as u16, 100 + i as u16, 200 + i as u16])
-        } else {
-            None
-        };
-        let pyth_account = if i == 2 {
-            Some([i as u8 + 10; 32])
-        } else {
-            None
-        };
-        let switch_board = if i == 0 {
-            Some([i as u8 + 20; 32])
-        } else {
-            None
-        };
+        let scope_details = Some([(i + 1) as u16; 3]);
+        let pyth_account = Some([(i + 1) as u8 * 10; 32]);
+        let switch_board = Some([(i + 1) as u8 * 11; 32]);
         let mint_mapping =
             MintMapping::new(mints[i], scope_details, pyth_account, switch_board, i as u8);
         let ix = create_add_mapping_ix(program_id, &fee_payer, state_pda, mint_mapping);
@@ -382,17 +362,14 @@ fn test_add_and_remove_middle_mapping() {
     }
     let reg = get_registry(&svm, &state_pda);
     assert_eq!(reg.total_mappings, 3);
-
     // Remove the middle mapping (index 1)
     let ix = create_close_mapping_ix(program_id, &fee_payer, state_pda, mints[1], bump);
     let msg =
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     svm.send_transaction(tx).unwrap();
-
     let reg = get_registry(&svm, &state_pda);
     assert_eq!(reg.total_mappings, 2);
-
     // Check the remaining mappings are the first and last
     let mapping0 = get_mapping(&svm, &state_pda, 0);
     let mapping1 = get_mapping(&svm, &state_pda, 1);
@@ -402,8 +379,8 @@ fn test_add_and_remove_middle_mapping() {
     assert_eq!(mapping0.decimals, 0);
     assert_eq!(mapping1.decimals, 2);
     // Check extra data
-    assert_eq!(mapping0.get_switch_board(), Some([20u8; 32]));
-    assert_eq!(mapping0.scope_details, None);
-    assert_eq!(mapping1.get_pyth_account(), Some([12u8; 32]));
-    assert_eq!(mapping1.scope_details, None);
+    assert_eq!(mapping0.get_switch_board(), Some([11u8; 32]));
+    assert_eq!(mapping0.scope_details, Some([1u16; 3]));
+    assert_eq!(mapping1.get_pyth_account(), Some([30u8; 32]));
+    assert_eq!(mapping1.scope_details, Some([3u16; 3]));
 }

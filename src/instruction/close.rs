@@ -51,13 +51,11 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
     }
     let ix_data = unsafe { load_ix_data::<CloseMappingIxData>(data)? };
 
-    let mut cost_diff = 0;
-    let mut new_size = 0;
+    let new_size;
     {
         // Validate that the account contains a valid registry
         let mut acc_data = state_acc.try_borrow_mut_data()?;
-        let mut registry =
-            ScopeMappingRegistry::from_slice(&acc_data[..ScopeMappingRegistry::LEN])?;
+        let mut registry = unsafe { *(acc_data.as_ptr() as *const ScopeMappingRegistry) };
         if !registry.is_initialized() {
             return Err(ProgramError::UninitializedAccount);
         }
@@ -68,7 +66,7 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
         }
 
         // Validate that the account is owned by our program
-        if unsafe { state_acc.owner() } != &crate::ID {
+        if state_acc.owner() != &crate::ID {
             return Err(ProgramError::IncorrectProgramId);
         }
 
@@ -82,16 +80,13 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
         // remove the mapping by removing the data from the acc_data
         let remove_len = mint_mapping_end_offset - mint_mapping_offset;
         new_size = acc_data.len() - remove_len;
-        let remaining_data = acc_data[mint_mapping_end_offset..].to_vec();
 
-        acc_data[mint_mapping_offset..mint_mapping_offset + remaining_data.len()]
-            .copy_from_slice(&remaining_data);
+        acc_data.copy_within(mint_mapping_end_offset.., mint_mapping_offset);
 
         // Zero out the trailing bytes to avoid data leakage
         for b in &mut acc_data[new_size..] {
             *b = 0;
         }
-        cost_diff = Rent::get()?.minimum_balance(state_acc.data_len());
 
         registry.subtract_mapping(new_size as u16)?;
 
@@ -99,14 +94,23 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
         acc_data[..ScopeMappingRegistry::LEN].copy_from_slice(&reg_bytes);
     }
 
-    state_acc.realloc(new_size, false)?;
-
-    if cost_diff > 0 {
-        unsafe {
-            *state_acc.borrow_mut_lamports_unchecked() = state_acc.lamports() - cost_diff;
-            *payer_acc.borrow_mut_lamports_unchecked() = payer_acc.lamports() + cost_diff;
-        };
+    if new_size < ScopeMappingRegistry::LEN {
+        return Err(MappingProgramError::InvalidAccountData.into());
     }
+
+    // Calculate the new minimum balance for rent exemption
+    let min_balance = Rent::get()?.minimum_balance(new_size);
+    let current_balance = state_acc.lamports();
+    let excess = current_balance.saturating_sub(min_balance);
+
+    if excess > 0 {
+        unsafe {
+            *state_acc.borrow_mut_lamports_unchecked() = current_balance - excess;
+            *payer_acc.borrow_mut_lamports_unchecked() = payer_acc.lamports() + excess;
+        }
+    }
+
+    state_acc.resize(new_size)?;
 
     Ok(())
 }

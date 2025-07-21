@@ -207,10 +207,10 @@ impl MintMapping {
             if data[offset..offset + 32] == *mint {
                 return Ok((offset, offset + mint_end_offset));
             }
-            offset = offset + mint_end_offset;
+            offset += mint_end_offset;
             total_size -= 1;
         }
 
-        return Err(MappingProgramError::MintNotFound);
+        Err(MappingProgramError::MintNotFound)
     }
 }

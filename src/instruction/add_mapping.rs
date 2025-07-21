@@ -61,7 +61,7 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
     .pad_to_align()
     .size();
 
-    state_acc.realloc(new_account_size, false)?;
+    state_acc.resize(new_account_size)?;
     let cost = Rent::get()?.minimum_balance(new_account_size);
     if cost > 0 {
         Transfer {
@@ -74,7 +74,7 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
 
     // Get the full account data as a mutable slice
     let mut acc_data = state_acc.try_borrow_mut_data()?;
-    let mut registry = ScopeMappingRegistry::from_account_data(&acc_data)?;
+    let mut registry = unsafe { *(acc_data.as_ptr() as *const ScopeMappingRegistry) };
 
     // CHECK if registry is initialized
     if !registry.is_initialized() {

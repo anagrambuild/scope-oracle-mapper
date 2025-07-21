@@ -9,9 +9,6 @@ pub use close::*;
 pub use initialize::*;
 use pinocchio_pubkey::pubkey;
 
-#[cfg(feature = "test-owner")]
-const OWNER_PUB_KEY: Pubkey = pubkey!("aaaykznHWqbsb643Uc6xeDgtmng3rh22jNfNYP5YuLq");
-#[cfg(not(feature = "test-owner"))]
 const OWNER_PUB_KEY: Pubkey = pubkey!("3hPmQsxMb4buU1PozSqMS7wni14JoP5kmPA9UTpJnerb");
 
 #[repr(u8)]
