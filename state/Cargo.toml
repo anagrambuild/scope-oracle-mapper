@@ -1,0 +1,8 @@
+[package]
+name = "oracle-mapping-state"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinocchio = { git = "https://github.com/anza-xyz/pinocchio.git" }
+shank = "0.4.3"

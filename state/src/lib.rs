@@ -1,3 +1,4 @@
+pub mod error;
 pub mod mint_mapping;
 pub mod scope_mapping_registry;
 pub mod utils;

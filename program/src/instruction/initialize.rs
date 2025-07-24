@@ -8,11 +8,10 @@ use pinocchio::{
 use pinocchio_system::instructions::CreateAccount;
 
 use crate::{
-    error::MappingProgramError,
     instruction::OWNER_PUB_KEY,
     state::{
+        error::MappingProgramError,
         scope_mapping_registry::ScopeMappingRegistry,
-        try_from_account_info_mut,
         utils::{load_ix_data, DataLen},
     },
 };
@@ -65,7 +64,7 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     let pda_bump_bytes = [ix_data.bump];
 
     // Validate the PDA
-    ScopeMappingRegistry::validate_pda(ix_data.bump, state_acc.key(), payer_acc.key())?;
+    ScopeMappingRegistry::validate_pda(ix_data.bump, state_acc.key(), payer_acc.key(), &crate::ID)?;
 
     // Signer seeds
     let signer_seeds = [
@@ -86,7 +85,8 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     .invoke_signed(&signers)?;
 
     // Initialize the account data using the proper method
-    let scope_reg_data = unsafe { try_from_account_info_mut::<ScopeMappingRegistry>(state_acc) }?;
+    let mut scope_reg_data =
+        ScopeMappingRegistry::from_account_data(unsafe { state_acc.borrow_data_unchecked() })?;
 
     scope_reg_data.owner = *payer_acc.key();
     scope_reg_data.total_mappings = 0;

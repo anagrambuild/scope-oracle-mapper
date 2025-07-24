@@ -8,8 +8,7 @@ use pinocchio::{
     ProgramResult,
 };
 
-use crate::error::MappingProgramError;
-use crate::state::mint_mapping::MintMapping;
+use crate::{error::MappingProgramError, mint_mapping::MintMapping};
 
 pub const MAX_MAPPINGS: u16 = 512;
 
@@ -37,9 +36,14 @@ impl Initialized for ScopeMappingRegistry {
 impl ScopeMappingRegistry {
     pub const SEED: &'static str = "ScopeMappingRegistry";
 
-    pub fn validate_pda(bump: u8, pda: &Pubkey, owner: &Pubkey) -> Result<(), ProgramError> {
+    pub fn validate_pda(
+        bump: u8,
+        pda: &Pubkey,
+        owner: &Pubkey,
+        program_id: &Pubkey,
+    ) -> Result<(), ProgramError> {
         let seed_with_bump = &[Self::SEED.as_bytes(), owner, &[bump]];
-        let derived = pubkey::create_program_address(seed_with_bump, &crate::ID)?;
+        let derived = pubkey::create_program_address(seed_with_bump, program_id)?;
         if derived != *pda {
             return Err(MappingProgramError::PdaMismatch.into());
         }

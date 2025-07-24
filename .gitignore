@@ -2,3 +2,4 @@
 test-ledger
 target
 certs
+cli/fee-payer.json

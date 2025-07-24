@@ -1,10 +1,7 @@
 use pinocchio::program_error::ProgramError;
 use shank::ShankAccount;
 
-use crate::{
-    error::MappingProgramError,
-    state::{DataLen, ScopeMappingRegistry},
-};
+use crate::{error::MappingProgramError, scope_mapping_registry::ScopeMappingRegistry, DataLen};
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, ShankAccount, Default)]

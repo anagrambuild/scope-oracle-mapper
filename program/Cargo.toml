@@ -1,0 +1,22 @@
+[package]
+name = "scope-mapping"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinocchio = { git = "https://github.com/anza-xyz/pinocchio.git" }
+pinocchio-pubkey = { git = "https://github.com/anza-xyz/pinocchio.git" }
+pinocchio-system = { git = "https://github.com/anza-xyz/pinocchio.git" }
+shank = "0.4.3"
+oracle-mapping-state = { path = "../state" }
+
+[dev-dependencies]
+litesvm = "0.6.1"
+solana-sdk = "2.2.1"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+no-entrypoint = []
+test-owner = []

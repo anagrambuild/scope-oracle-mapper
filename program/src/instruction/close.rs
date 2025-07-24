@@ -1,7 +1,7 @@
 use crate::{
-    error::MappingProgramError,
     instruction::{IntoBytes, OWNER_PUB_KEY},
     state::{
+        error::MappingProgramError,
         mint_mapping::MintMapping,
         scope_mapping_registry::ScopeMappingRegistry,
         utils::{load_ix_data, DataLen},
@@ -71,7 +71,12 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
         }
 
         // Validate the PDA
-        ScopeMappingRegistry::validate_pda(ix_data.bump, state_acc.key(), payer_acc.key())?;
+        ScopeMappingRegistry::validate_pda(
+            ix_data.bump,
+            state_acc.key(),
+            payer_acc.key(),
+            &crate::ID,
+        )?;
 
         // Find the mapping offsets using only the mutable borrow
         let (mint_mapping_offset, mint_mapping_end_offset) =
