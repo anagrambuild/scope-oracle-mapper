@@ -198,6 +198,26 @@ impl MintMapping {
     pub fn get_mapping_details(
         data: &[u8],
         mint: &[u8; 32],
+    ) -> Result<MintMapping, MappingProgramError> {
+        let mut total_size = unsafe { *data.get_unchecked(34) } as u16;
+        let mut offset = ScopeMappingRegistry::LEN;
+
+        while total_size > 0 {
+            let mint_end_offset = unsafe { *data.get_unchecked(offset + 32) } as usize;
+            if data[offset..offset + 32] == *mint {
+                return MintMapping::from_bytes(&data[offset..offset + mint_end_offset])
+                    .map_err(|_| MappingProgramError::MintNotFound);
+            }
+            offset += mint_end_offset;
+            total_size -= 1;
+        }
+
+        Err(MappingProgramError::MintNotFound)
+    }
+
+    pub fn get_mapping_offset(
+        data: &[u8],
+        mint: &[u8; 32],
     ) -> Result<(usize, usize), MappingProgramError> {
         let mut total_size = unsafe { *data.get_unchecked(34) } as u16;
         let mut offset = ScopeMappingRegistry::LEN;

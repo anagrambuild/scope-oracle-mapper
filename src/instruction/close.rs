@@ -75,7 +75,7 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
 
         // Find the mapping offsets using only the mutable borrow
         let (mint_mapping_offset, mint_mapping_end_offset) =
-            MintMapping::get_mapping_details(&acc_data, &ix_data.mint)?;
+            MintMapping::get_mapping_offset(&acc_data, &ix_data.mint)?;
 
         // remove the mapping by removing the data from the acc_data
         let remove_len = mint_mapping_end_offset - mint_mapping_offset;

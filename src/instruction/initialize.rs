@@ -9,7 +9,7 @@ use pinocchio_system::instructions::CreateAccount;
 
 use crate::{
     error::MappingProgramError,
-    instruction::{IntoBytes, OWNER_PUB_KEY},
+    instruction::OWNER_PUB_KEY,
     state::{
         scope_mapping_registry::ScopeMappingRegistry,
         try_from_account_info_mut,
