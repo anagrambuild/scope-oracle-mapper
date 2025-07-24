@@ -21,7 +21,7 @@ fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
 
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
 
-    let program_id = Pubkey::from_str("HeyqQW2AYdG9F8d25UZYTwV6SjEXbwwxngSrhem1D1Ww").unwrap();
+    let program_id = Pubkey::from(scope_mapping::ID);
     svm.add_program_from_file(program_id, "./target/deploy/scope_mapping.so")
         .unwrap();
     let (state_pda, bump) = Pubkey::find_program_address(
@@ -102,7 +102,6 @@ fn create_close_mapping_ix(
 
 fn get_registry(svm: &LiteSVM, state_pda: &Pubkey) -> ScopeMappingRegistry {
     let data = svm.get_account(state_pda).unwrap().data;
-    println!("data: {:?}", data.len());
     ScopeMappingRegistry::from_slice(&data[..ScopeMappingRegistry::LEN]).unwrap()
 }
 
@@ -182,18 +181,19 @@ fn test_initialize_and_add_mapping() {
 
 #[test]
 fn test_initialize_wrong_owner() {
-    let (mut svm, fee_payer, program_id, state_pda, bump) = setup_svm_and_program();
+    let (mut svm, _fee_payer, program_id, state_pda, bump) = setup_svm_and_program();
     let wrong_owner = Keypair::new();
+    svm.airdrop(&wrong_owner.pubkey(), 100000000).unwrap();
     let ix = create_initialize_registry_ix(
         program_id,
-        &fee_payer,
+        &wrong_owner,
         state_pda,
         bump,
         wrong_owner.pubkey().to_bytes(),
     );
-    let msg =
-        v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
-    let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
+    let msg = v0::Message::try_compile(&wrong_owner.pubkey(), &[ix], &[], svm.latest_blockhash())
+        .unwrap();
+    let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&wrong_owner]).unwrap();
     let result = svm.send_transaction(tx);
     assert!(result.is_err());
 }
@@ -417,7 +417,6 @@ fn test_add_mapping_and_remove_mapping_verify_registry() {
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     let result = svm.send_transaction(tx);
-    println!("result: {:?}", result);
     assert!(result.is_ok());
 
     let reg = get_registry(&svm, &state_pda);
@@ -430,10 +429,8 @@ fn test_add_mapping_and_remove_mapping_verify_registry() {
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
     let result = svm.send_transaction(tx);
-    println!("result: {:?}", result);
     assert!(result.is_ok());
     let reg = get_registry(&svm, &state_pda);
-    println!("reg: {:?}", reg);
     assert_eq!(reg.total_mappings, 0);
     assert_eq!(reg.last_mapping_offset, 0);
 }
