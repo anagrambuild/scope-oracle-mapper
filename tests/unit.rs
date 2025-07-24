@@ -36,12 +36,12 @@ fn create_initialize_registry_ix(
     fee_payer: &Keypair,
     state_pda: Pubkey,
     bump: u8,
-    owner: [u8; 32],
+    _owner: [u8; 32],
 ) -> Instruction {
-    let binding = InitializeRegistryIxData { owner, bump };
-    let ix_data = binding.into_bytes().unwrap();
+    let binding = InitializeRegistryIxData { bump };
+    let ix_data = binding.to_bytes();
     let mut ix_data_with_discriminator = vec![0];
-    ix_data_with_discriminator.extend_from_slice(ix_data);
+    ix_data_with_discriminator.extend_from_slice(&ix_data);
     Instruction {
         program_id,
         accounts: vec![
@@ -102,6 +102,7 @@ fn create_close_mapping_ix(
 
 fn get_registry(svm: &LiteSVM, state_pda: &Pubkey) -> ScopeMappingRegistry {
     let data = svm.get_account(state_pda).unwrap().data;
+    println!("data: {:?}", data.len());
     ScopeMappingRegistry::from_slice(&data[..ScopeMappingRegistry::LEN]).unwrap()
 }
 
@@ -376,4 +377,63 @@ fn test_add_and_remove_middle_mapping() {
     assert_eq!(mapping0.scope_details, Some([1u16; 3]));
     assert_eq!(mapping1.get_pyth_account(), Some([30u8; 32]));
     assert_eq!(mapping1.scope_details, Some([3u16; 3]));
+}
+
+#[test]
+fn test_add_mapping_and_remove_mapping_verify_registry() {
+    let (mut svm, fee_payer, program_id, state_pda, bump) = setup_svm_and_program();
+    // Initialize
+    let ix = create_initialize_registry_ix(
+        program_id,
+        &fee_payer,
+        state_pda,
+        bump,
+        fee_payer.pubkey().to_bytes(),
+    );
+    let msg =
+        v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
+    let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
+    svm.send_transaction(tx).unwrap();
+    // Add mapping
+    let mint_mapping = MintMapping::new(
+        Pubkey::from_str("So11111111111111111111111111111111111111111")
+            .unwrap()
+            .to_bytes(),
+        Some([0, u16::MAX, u16::MAX]),
+        Some(
+            Pubkey::from_str("7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE")
+                .unwrap()
+                .to_bytes(),
+        ),
+        Some(
+            Pubkey::from_str("3PiwrLLyiuWaxS7zJL5znGR9iYD3KWubZThdQzsCdg2e")
+                .unwrap()
+                .to_bytes(),
+        ),
+        9,
+    );
+    let ix = create_add_mapping_ix(program_id, &fee_payer, state_pda, mint_mapping);
+    let msg =
+        v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
+    let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
+    let result = svm.send_transaction(tx);
+    println!("result: {:?}", result);
+    assert!(result.is_ok());
+
+    let reg = get_registry(&svm, &state_pda);
+    assert_eq!(reg.total_mappings, 1);
+    assert_eq!(reg.last_mapping_offset, 105);
+
+    // Remove mapping
+    let ix = create_close_mapping_ix(program_id, &fee_payer, state_pda, mint_mapping.mint, bump);
+    let msg =
+        v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
+    let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
+    let result = svm.send_transaction(tx);
+    println!("result: {:?}", result);
+    assert!(result.is_ok());
+    let reg = get_registry(&svm, &state_pda);
+    println!("reg: {:?}", reg);
+    assert_eq!(reg.total_mappings, 0);
+    assert_eq!(reg.last_mapping_offset, 0);
 }

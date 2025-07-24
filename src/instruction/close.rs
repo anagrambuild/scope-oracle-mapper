@@ -88,7 +88,7 @@ pub fn process_close_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramRe
             *b = 0;
         }
 
-        registry.subtract_mapping(new_size as u16)?;
+        registry.subtract_mapping(remove_len as u16)?;
 
         let reg_bytes = registry.to_bytes();
         acc_data[..ScopeMappingRegistry::LEN].copy_from_slice(&reg_bytes);

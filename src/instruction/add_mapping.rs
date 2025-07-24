@@ -53,13 +53,7 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
     let mapping = ix_data.mapping;
     let mapping_size = mapping.serialized_size();
 
-    let new_account_size = core::alloc::Layout::from_size_align(
-        end_offset + mapping_size as usize,
-        core::mem::size_of::<u64>(),
-    )
-    .map_err(|_| MappingProgramError::InvalidAccountData)?
-    .pad_to_align()
-    .size();
+    let new_account_size = end_offset + mapping_size as usize;
 
     state_acc.resize(new_account_size)?;
     let cost = Rent::get()?.minimum_balance(new_account_size);

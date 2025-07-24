@@ -20,17 +20,23 @@ use crate::{
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, shank::ShankType)]
 pub struct InitializeRegistryIxData {
-    pub owner: [u8; 32],
     pub bump: u8,
 }
 
 impl DataLen for InitializeRegistryIxData {
-    const LEN: usize = core::mem::size_of::<InitializeRegistryIxData>(); // 32 bytes for owner + 1 byte for bump
+    const LEN: usize = 1;
 }
 
-impl IntoBytes for InitializeRegistryIxData {
-    fn into_bytes(&self) -> Result<&[u8], ProgramError> {
-        Ok(unsafe { core::slice::from_raw_parts(self as *const Self as *const u8, Self::LEN) })
+impl InitializeRegistryIxData {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self, ProgramError> {
+        if bytes.len() != Self::LEN {
+            return Err(ProgramError::InvalidInstructionData);
+        }
+        Ok(Self { bump: bytes[0] })
+    }
+
+    pub fn to_bytes(&self) -> [u8; Self::LEN] {
+        [self.bump]
     }
 }
 
@@ -52,7 +58,7 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     let ix_data = unsafe { load_ix_data::<InitializeRegistryIxData>(data)? };
 
     // Hardcoded authority check
-    if payer_acc.key().as_ref() != OWNER_PUB_KEY || ix_data.owner != OWNER_PUB_KEY {
+    if payer_acc.key().as_ref() != OWNER_PUB_KEY {
         return Err(MappingProgramError::InvalidOwner.into());
     }
 
@@ -64,7 +70,7 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     // Signer seeds
     let signer_seeds = [
         Seed::from(ScopeMappingRegistry::SEED.as_bytes()),
-        Seed::from(&ix_data.owner),
+        Seed::from(payer_acc.key().as_ref()),
         Seed::from(&pda_bump_bytes[..]),
     ];
     let signers = [Signer::from(&signer_seeds[..])];
@@ -82,7 +88,7 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     // Initialize the account data using the proper method
     let scope_reg_data = unsafe { try_from_account_info_mut::<ScopeMappingRegistry>(state_acc) }?;
 
-    scope_reg_data.owner = ix_data.owner;
+    scope_reg_data.owner = *payer_acc.key();
     scope_reg_data.total_mappings = 0;
     scope_reg_data.version = 0;
     scope_reg_data.bump = ix_data.bump;
