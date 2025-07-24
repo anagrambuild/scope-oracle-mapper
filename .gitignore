@@ -1,2 +1,4 @@
-/target
-test-ledger/*
+.DS_Store
+test-ledger
+target
+certs
