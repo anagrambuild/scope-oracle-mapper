@@ -86,19 +86,10 @@ struct MintMappingInput {
 fn setup_rpc_and_program() -> (RpcClient, Keypair, Pubkey, Pubkey, u8) {
     let rpc = RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let fee_payer = Keypair::from_bytes(&[
-        218, 201, 131, 153, 239, 193, 233, 36, 236, 30, 49, 16, 85, 39, 174, 123, 161, 166, 237,
-        165, 139, 193, 194, 59, 178, 99, 131, 117, 146, 234, 169, 180, 40, 16, 88, 245, 130, 119,
-        100, 222, 3, 231, 239, 92, 174, 153, 218, 163, 93, 246, 179, 233, 74, 242, 242, 124, 223,
-        252, 34, 181, 118, 198, 24, 232,
-    ])
-    .unwrap();
-    // let fee_payer = Keypair::read_from_file("~/.config/solana/id.json").unwrap();
-    // rpc.request_airdrop(&fee_payer.pubkey(), 100000000).unwrap();
-    // rpc.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
+    let fee_payer = Keypair::read_from_file("fee-payer.json").unwrap();
+
     let program_id = Pubkey::from(scope_mapping::ID);
-    // svm.add_program_from_file(program_id, "./target/deploy/scope_mapping.so")
-    //     .unwrap();
+
     let (state_pda, bump) = Pubkey::find_program_address(
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
         &program_id,
