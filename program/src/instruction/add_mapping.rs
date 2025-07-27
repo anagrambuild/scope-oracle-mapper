@@ -7,9 +7,9 @@ use pinocchio::{
 use pinocchio_system::instructions::Transfer;
 
 use crate::{
-    error::MappingProgramError,
     instruction::{IntoBytes, OWNER_PUB_KEY},
     state::{
+        error::MappingProgramError,
         mint_mapping::MintMapping,
         scope_mapping_registry::ScopeMappingRegistry,
         utils::{load_ix_data, DataLen},
@@ -76,7 +76,12 @@ pub fn process_add_mapping(accounts: &[AccountInfo], data: &[u8]) -> ProgramResu
     }
 
     // Validate PDA
-    ScopeMappingRegistry::validate_pda(registry.bump, state_acc.key(), payer_acc.key())?;
+    ScopeMappingRegistry::validate_pda(
+        registry.bump,
+        state_acc.key(),
+        payer_acc.key(),
+        &crate::ID,
+    )?;
 
     if registry.owner.ne(payer_acc.key()) {
         return Err(MappingProgramError::InvalidOwner.into());

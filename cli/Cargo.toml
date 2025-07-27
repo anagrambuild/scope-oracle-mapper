@@ -1,0 +1,15 @@
+[package]
+name = "mapping-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+solana-client = "2.2.0"
+solana-sdk = "2.2.0"
+oracle-mapping-state = { path = "../state" }
+scope-mapping = { path = "../program" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dev-dependencies]

@@ -1,21 +1,23 @@
-[package]
-name = "scope-mapping"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = [
+    "program",
+    "state",
+    "cli",
+]
 
-[dependencies]
-pinocchio = { git = "https://github.com/anza-xyz/pinocchio.git" }
-pinocchio-pubkey = { git = "https://github.com/anza-xyz/pinocchio.git" }
-pinocchio-system = { git = "https://github.com/anza-xyz/pinocchio.git" }
-shank = "0.4.3"
+[workspace.package]
+version = "1.0.0"
 
-[dev-dependencies]
-litesvm = "0.6.1"
-solana-sdk = "2.2.1"
 
-[lib]
-crate-type = ["cdylib", "lib"]
+[workspace.lints.rust]
+unused_imports = "allow"
+unused_mut = "allow"
+dead_code = "allow"
+unused_macros = "allow"
+unused_variables = "allow"
 
-[features]
-no-entrypoint = []
-test-owner = []
+
+[workspace.lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = ['cfg(target_os, values("solana"))']
