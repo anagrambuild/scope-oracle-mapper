@@ -85,14 +85,13 @@ pub fn process_initialize_state(accounts: &[AccountInfo], data: &[u8]) -> Progra
     .invoke_signed(&signers)?;
 
     // Initialize the account data using the proper method
-    let mut scope_reg_data =
-        ScopeMappingRegistry::from_account_data(unsafe { state_acc.borrow_data_unchecked() })?;
+    let scope_reg_data = ScopeMappingRegistry::new(*payer_acc.key(), ix_data.bump);
 
-    scope_reg_data.owner = *payer_acc.key();
-    scope_reg_data.total_mappings = 0;
-    scope_reg_data.version = 0;
-    scope_reg_data.bump = ix_data.bump;
-    scope_reg_data.is_initialized = 1;
+    unsafe {
+        state_acc
+            .borrow_mut_data_unchecked()
+            .copy_from_slice(&scope_reg_data.to_bytes());
+    }
 
     Ok(())
 }

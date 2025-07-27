@@ -135,4 +135,15 @@ impl ScopeMappingRegistry {
         }
         Ok(&data[Self::LEN..])
     }
+
+    pub fn new(owner: [u8; 32], bump: u8) -> Self {
+        Self {
+            is_initialized: 1,
+            owner: owner,
+            total_mappings: 0,
+            version: 0,
+            last_mapping_offset: 0,
+            bump: bump,
+        }
+    }
 }

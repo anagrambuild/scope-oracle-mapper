@@ -22,7 +22,7 @@ fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
 
     let program_id = Pubkey::from(scope_mapping::ID);
-    svm.add_program_from_file(program_id, "./target/deploy/scope_mapping.so")
+    svm.add_program_from_file(program_id, "../target/deploy/scope_mapping.so")
         .unwrap();
     let (state_pda, bump) = Pubkey::find_program_address(
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
@@ -142,8 +142,11 @@ fn test_initialize_and_add_mapping() {
     let msg =
         v0::Message::try_compile(&fee_payer.pubkey(), &[ix], &[], svm.latest_blockhash()).unwrap();
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[&fee_payer]).unwrap();
-    svm.send_transaction(tx).unwrap();
+    let result = svm.send_transaction(tx);
+    println!("result: {:?}", result);
+    assert!(result.is_ok());
     let reg = get_registry(&svm, &state_pda);
+    println!("reg: {:?}", reg);
     assert_eq!(reg.owner, fee_payer.pubkey().to_bytes());
     assert_eq!(reg.total_mappings, 0);
     assert_eq!(reg.is_initialized, 1);
