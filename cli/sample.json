@@ -1,9 +1,890 @@
 [
   {
-    "mint": "So11111111111111111111111111111111111111111",
+    "symbol": "SOL",
+    "name": "Wrapped SOL",
+    "mint": "So11111111111111111111111111111111111111112",
     "decimals": 9,
     "scope_details": [0, 65535, 65535],
-    "pyth_account": "So11111111111111111111111111111111111111112",
+    "pyth_account": "7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE",
     "switchboard": "So11111111111111111111111111111111111111112"
+  },
+  {
+    "symbol": "BONK",
+    "name": "Bonk",
+    "mint": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+    "decimals": 9,
+    "scope_details": [68, 65535, 65535],
+    "pyth_account": "DBE3N8uNjhKPRHfANdwGvCZghWXyLPdqdSbEW2XFwBiX",
+    "switchboard": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+  },
+  {
+    "symbol": "PENGU",
+    "name": "Pudgy Penguins",
+    "mint": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+    "decimals": 9,
+    "scope_details": [109, 65535, 65535],
+    "switchboard": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv"
+  },
+  {
+    "symbol": "TRUMP",
+    "name": "OFFICIAL TRUMP",
+    "mint": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+    "decimals": 9,
+    "scope_details": [64, 65535, 65535],
+    "pyth_account": "9vNb2tQoZ8bB4vzMbQLWViGwNaDJVtct13AGgno1wazp",
+    "switchboard": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
+  },
+  {
+    "symbol": "UNI",
+    "name": "Unicorn Fart Dust",
+    "mint": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump",
+    "decimals": 9,
+    "switchboard": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump"
+  },
+  {
+    "symbol": "WIF",
+    "name": "dogwifhat",
+    "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    "decimals": 9,
+    "scope_details": [462, 65535, 65535],
+    "pyth_account": "6B23K3tkb51vLZA14jcEQVCA1pfHptzEHFA93V5dYwbT",
+    "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+  },
+  {
+    "symbol": "PUMP",
+    "name": "Pump",
+    "mint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+    "decimals": 9,
+    "pyth_account": "HMm3GPbdnqGwbkTnUUqCFsH8AMHDdEC3Lg8gcPD3HJSH",
+    "switchboard": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn"
+  },
+  {
+    "symbol": "FARTCOIN",
+    "name": "Fartcoin",
+    "mint": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+    "decimals": 9,
+    "scope_details": [179, 65535, 65535],
+    "pyth_account": "2t8eUbYKjidMs3uSeYM9jXM9uudYZwGkSeTB4TKjmvnC",
+    "switchboard": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump"
+  },
+  {
+    "symbol": "VIRTUAL",
+    "name": "Virtual Protocol",
+    "mint": "3iQL8BFS2vE7mww4ehAqQHAsbmRNCrPxizWAT2Zfyr9y",
+    "decimals": 9,
+    "switchboard": "3iQL8BFS2vE7mww4ehAqQHAsbmRNCrPxizWAT2Zfyr9y"
+  },
+  {
+    "symbol": "PNUT",
+    "name": "Peanut the Squirrel",
+    "mint": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+    "decimals": 9,
+    "scope_details": [411, 65535, 65535],
+    "switchboard": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump"
+  },
+  {
+    "symbol": "CAKE",
+    "name": "PancakeSwap Token",
+    "mint": "4qQeZ5LwSz6HuupUu8jCtgXyW1mYQcNbFAW1sWZp89HL",
+    "decimals": 9,
+    "switchboard": "4qQeZ5LwSz6HuupUu8jCtgXyW1mYQcNbFAW1sWZp89HL"
+  },
+  {
+    "symbol": "MOODENG",
+    "name": "Moo Deng",
+    "mint": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+    "decimals": 9,
+    "scope_details": [76, 65535, 65535],
+    "switchboard": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY"
+  },
+  {
+    "symbol": "AI16Z",
+    "name": "ai16z",
+    "mint": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+    "decimals": 9,
+    "scope_details": [95, 65535, 65535],
+    "pyth_account": "BxizdE1Rd9yeCXUaorGNGLc4qHbqBULxiBtjRX37HjSV",
+    "switchboard": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC"
+  },
+  {
+    "symbol": "JUP",
+    "name": "Jupiter",
+    "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+    "decimals": 9,
+    "scope_details": [267, 65535, 65535],
+    "pyth_account": "7dbob1psH1iZBS7qPsm3Kwbf5DzSXK8Jyg31CTgTnxH5",
+    "switchboard": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"
+  },
+  {
+    "symbol": "RAY",
+    "name": "Raydium",
+    "mint": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+    "decimals": 9,
+    "scope_details": [4, 65535, 65535],
+    "pyth_account": "Hhipna3EoWR7u8pDruUg8RxhP5F6XLh6SEHMVDmZhWi8",
+    "switchboard": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R"
+  },
+  {
+    "symbol": "RENDER",
+    "name": "Render Token",
+    "mint": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof",
+    "decimals": 9,
+    "scope_details": [450, 65535, 65535],
+    "pyth_account": "HAm5DZhrgrWa12heKSxocQRyJWGCtXegC77hFQ8F5QTH",
+    "switchboard": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof"
+  },
+  {
+    "symbol": "POPCAT",
+    "name": "Popcat",
+    "mint": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+    "decimals": 9,
+    "scope_details": [492, 65535, 65535],
+    "switchboard": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr"
+  },
+  {
+    "symbol": "SPX",
+    "name": "SPX6900 (Wormhole)",
+    "mint": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr",
+    "decimals": 9,
+    "scope_details": [93, 65535, 65535],
+    "switchboard": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr"
+  },
+  {
+    "symbol": "NEIRO",
+    "name": "Neiro",
+    "mint": "CTJf74cTo3cw8acFP1YXF3QpsQUUBGBjh2k2e8xsZ6UL",
+    "decimals": 9,
+    "switchboard": "CTJf74cTo3cw8acFP1YXF3QpsQUUBGBjh2k2e8xsZ6UL"
+  },
+  {
+    "symbol": "MEW",
+    "name": "cat in a dogs world",
+    "mint": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5",
+    "decimals": 9,
+    "scope_details": [106, 65535, 65535],
+    "pyth_account": "EF6U755BdHMXim8RBw6XSC6Yk6XaouTKpwcBZ7QkcanB",
+    "switchboard": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5"
+  },
+  {
+    "symbol": "JTO",
+    "name": "Jito Staked SOL",
+    "mint": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
+    "decimals": 9,
+    "scope_details": [146, 65535, 65535],
+    "pyth_account": "AxaxyeDT8JnWERSaTKvFXvPKkEdxnamKSqpWbsSjYg1g",
+    "switchboard": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
+  },
+  {
+    "symbol": "MANA",
+    "name": "Meme Anarchic Numismatic Asset",
+    "mint": "Bw5K8eZaf361uDLHgX2UUn1PNfC7XtgQVvY9sSappump",
+    "decimals": 9,
+    "switchboard": "Bw5K8eZaf361uDLHgX2UUn1PNfC7XtgQVvY9sSappump"
+  },
+  {
+    "symbol": "BOME",
+    "name": "BOOK OF MEME",
+    "mint": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+    "decimals": 9,
+    "scope_details": [409, 65535, 65535],
+    "switchboard": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82"
+  },
+  {
+    "symbol": "LAYER",
+    "name": "Solayer",
+    "mint": "LAYER4xPpTCb3QL8S9u41EAhAX7mhBn8Q6xMTwY2Yzc",
+    "decimals": 9,
+    "scope_details": [141, 65535, 65535],
+    "switchboard": "LAYER4xPpTCb3QL8S9u41EAhAX7mhBn8Q6xMTwY2Yzc"
+  },
+  {
+    "symbol": "PYTH",
+    "name": "Pyth Network",
+    "mint": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+    "decimals": 9,
+    "scope_details": [133, 65535, 65535],
+    "pyth_account": "8vjchtMuJNY4oFQdTi8yCe6mhCaNBFaUbktT482TpLPS",
+    "switchboard": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3"
+  },
+  {
+    "symbol": "AR",
+    "name": "AI Rig Complex",
+    "mint": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump",
+    "decimals": 9,
+    "switchboard": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump"
+  },
+  {
+    "symbol": "GOAT",
+    "name": "Goatseus Maximus",
+    "mint": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+    "decimals": 9,
+    "scope_details": [502, 65535, 65535],
+    "switchboard": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump"
+  },
+  {
+    "symbol": "W",
+    "name": "dogwifhat",
+    "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    "decimals": 9,
+    "scope_details": [358, 65535, 65535],
+    "pyth_account": "BEMsCSQEGi2kwPA4mKnGjxnreijhMki7L4eeb96ypzF9",
+    "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+  },
+  {
+    "symbol": "COMP",
+    "name": "Ani Grok Companion",
+    "mint": "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
+    "decimals": 9,
+    "switchboard": "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk"
+  },
+  {
+    "symbol": "MOG",
+    "name": "Mog Coin",
+    "mint": "26VfKb7jjtdEdvfovoBijScoZmJbWWasFZkgfUD5w7cy",
+    "decimals": 9,
+    "switchboard": "26VfKb7jjtdEdvfovoBijScoZmJbWWasFZkgfUD5w7cy"
+  },
+  {
+    "symbol": "USELESS",
+    "name": "USELESS COIN",
+    "mint": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk",
+    "decimals": 9,
+    "switchboard": "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk"
+  },
+  {
+    "symbol": "DRIFT",
+    "name": "Drift Staked SOL",
+    "mint": "Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ",
+    "decimals": 9,
+    "scope_details": [452, 65535, 65535],
+    "switchboard": "Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ"
+  },
+  {
+    "symbol": "IO",
+    "name": "IO",
+    "mint": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K",
+    "decimals": 9,
+    "scope_details": [412, 65535, 65535],
+    "switchboard": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K"
+  },
+  {
+    "symbol": "GRASS",
+    "name": "Grass",
+    "mint": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs",
+    "decimals": 9,
+    "scope_details": [448, 65535, 65535],
+    "switchboard": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs"
+  },
+  {
+    "symbol": "JLP",
+    "name": "Jupiter Perps",
+    "mint": "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4",
+    "decimals": 9,
+    "scope_details": [124, 65535, 65535],
+    "pyth_account": "2TTGSRSezqFzeLUH8JwRUbtN66XLLaymfYsWRTMjfiMw",
+    "switchboard": "27G8MtK7VtTcCHkpASjSDdkWWYfoqT6ggEuKidVJidD4"
+  },
+  {
+    "symbol": "SAROS",
+    "name": "Saros",
+    "mint": "SarosY6Vscao718M4A778z4CGtvcwcGef5M9MEH1LGL",
+    "decimals": 9,
+    "switchboard": "SarosY6Vscao718M4A778z4CGtvcwcGef5M9MEH1LGL"
+  },
+  {
+    "symbol": "GMT",
+    "name": "GMT",
+    "mint": "7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx",
+    "decimals": 9,
+    "scope_details": [231, 65535, 65535],
+    "switchboard": "7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx"
+  },
+  {
+    "symbol": "ZBCN",
+    "name": "Zebec Network",
+    "mint": "ZBCNpuD7YMXzTHB2fhGkGi78MNsHGLRXUhRewNRm9RU",
+    "decimals": 9,
+    "switchboard": "ZBCNpuD7YMXzTHB2fhGkGi78MNsHGLRXUhRewNRm9RU"
+  },
+  {
+    "symbol": "FIDA",
+    "name": "Bonfida",
+    "mint": "EchesyfXePKdLtoiZSL8pBe8Myagyy8ZRqsACNCFGnvp",
+    "decimals": 9,
+    "pyth_account": "2cfmeuVBf7bvBJcjKBQgAwfvpUvdZV7K8NZxUEuccrub",
+    "switchboard": "EchesyfXePKdLtoiZSL8pBe8Myagyy8ZRqsACNCFGnvp"
+  },
+  {
+    "symbol": "GP",
+    "name": "Graphite",
+    "mint": "31k88G5Mq7ptbRDf3AM13HAq6wRQHXHikR8hik7wPygk",
+    "decimals": 9,
+    "scope_details": [167, 65535, 65535],
+    "switchboard": "31k88G5Mq7ptbRDf3AM13HAq6wRQHXHikR8hik7wPygk"
+  },
+  {
+    "symbol": "ME",
+    "name": "cat in a dogs world",
+    "mint": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5",
+    "decimals": 9,
+    "scope_details": [101, 65535, 65535],
+    "switchboard": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5"
+  },
+  {
+    "symbol": "BIO",
+    "name": "BIO",
+    "mint": "bioJ9JTqW62MLz7UKHU69gtKhPpGi1BQhccj2kmSvUJ",
+    "decimals": 9,
+    "switchboard": "bioJ9JTqW62MLz7UKHU69gtKhPpGi1BQhccj2kmSvUJ"
+  },
+  {
+    "symbol": "MPLX",
+    "name": "Metaplex Token",
+    "mint": "METAewgxyPbgwsseH8T16a39CQ5VyVxZi9zXiDPY18m",
+    "decimals": 9,
+    "scope_details": [181, 65535, 65535],
+    "switchboard": "METAewgxyPbgwsseH8T16a39CQ5VyVxZi9zXiDPY18m"
+  },
+  {
+    "symbol": "KMNO",
+    "name": "Kamino",
+    "mint": "KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS",
+    "decimals": 9,
+    "scope_details": [454, 65535, 65535],
+    "pyth_account": "ArjngUHXrQPr1wH9Bqrji9hdDQirM6ijbzc1Jj1fXUk7",
+    "switchboard": "KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS"
+  },
+  {
+    "symbol": "ORCA",
+    "name": "Orca",
+    "mint": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+    "decimals": 9,
+    "scope_details": [23, 65535, 65535],
+    "pyth_account": "4CBshVeNBEXz24GZpoj8SrqP5L7VGG3qjGd6tCST1pND",
+    "switchboard": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE"
+  },
+  {
+    "symbol": "DOG",
+    "name": "dogwifhat",
+    "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    "decimals": 9,
+    "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+  },
+  {
+    "symbol": "HNT",
+    "name": "Helium Network Token",
+    "mint": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux",
+    "decimals": 9,
+    "scope_details": [84, 65535, 65535],
+    "pyth_account": "4DdmDswskDxXGpwHrXUfn2CNUm9rt21ac79GHNTN3J33",
+    "switchboard": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux"
+  },
+  {
+    "symbol": "GOMINING",
+    "name": "GNOME MINING GAME",
+    "mint": "BaDjVCpABEVCdt4LT7ivuzA4izBwJCqnDjrLa8XBtT38",
+    "decimals": 9,
+    "switchboard": "BaDjVCpABEVCdt4LT7ivuzA4izBwJCqnDjrLa8XBtT38"
+  },
+  {
+    "symbol": "ALCH",
+    "name": "Alchemist AI",
+    "mint": "HNg5PYJmtqcmzXrv6S9zP1CDKk5BgDuyFBxbvNApump",
+    "decimals": 9,
+    "switchboard": "HNg5PYJmtqcmzXrv6S9zP1CDKk5BgDuyFBxbvNApump"
+  },
+  {
+    "symbol": "DEGEN",
+    "name": "Degen Spartan AI",
+    "mint": "Gu3LDkn7Vx3bmCzLafYNKcDxv2mH7YN44NJZFXnypump",
+    "decimals": 9,
+    "switchboard": "Gu3LDkn7Vx3bmCzLafYNKcDxv2mH7YN44NJZFXnypump"
+  },
+  {
+    "symbol": "GIGA",
+    "name": "GIGACHAD",
+    "mint": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+    "decimals": 9,
+    "scope_details": [471, 65535, 65535],
+    "switchboard": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9"
+  },
+  {
+    "symbol": "REKT",
+    "name": "Rekt",
+    "mint": "vQoYWru2pbUdcVkUrRH74ktQDJgVjRcDvsoDbUzM5n9",
+    "decimals": 9,
+    "switchboard": "vQoYWru2pbUdcVkUrRH74ktQDJgVjRcDvsoDbUzM5n9"
+  },
+  {
+    "symbol": "MELANIA",
+    "name": "Melania Meme",
+    "mint": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+    "decimals": 9,
+    "switchboard": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P"
+  },
+  {
+    "symbol": "PYTHIA",
+    "name": "PYTHIA",
+    "mint": "CreiuhfwdWCN5mJbMJtA9bBpYQrQF2tCBuZwSPWfpump",
+    "decimals": 9,
+    "switchboard": "CreiuhfwdWCN5mJbMJtA9bBpYQrQF2tCBuZwSPWfpump"
+  },
+  {
+    "symbol": "AURA",
+    "name": "aura",
+    "mint": "DtR4D9FtVoTX2569gaL837ZgrB6wNjj6tkmnX9Rdk9B2",
+    "decimals": 9,
+    "switchboard": "DtR4D9FtVoTX2569gaL837ZgrB6wNjj6tkmnX9Rdk9B2"
+  },
+  {
+    "symbol": "WILD",
+    "name": "Official Wild 'N Out",
+    "mint": "5m9AhhwMnosop8CAWdSJDNfLLkg3EFkX5sJ3zAuMpump",
+    "decimals": 9,
+    "switchboard": "5m9AhhwMnosop8CAWdSJDNfLLkg3EFkX5sJ3zAuMpump"
+  },
+  {
+    "symbol": "CHEX",
+    "name": "Chintai",
+    "mint": "6dKCoWjpj5MFU5gWDEFdpUUeBasBLK3wLEwhUzQPAa1e",
+    "decimals": 9,
+    "switchboard": "6dKCoWjpj5MFU5gWDEFdpUUeBasBLK3wLEwhUzQPAa1e"
+  },
+  {
+    "symbol": "YU",
+    "name": "Yala stablecoin",
+    "mint": "YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu",
+    "decimals": 9,
+    "switchboard": "YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu"
+  },
+  {
+    "symbol": "HONEY",
+    "name": "HONEY",
+    "mint": "4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy",
+    "decimals": 9,
+    "switchboard": "4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy"
+  },
+  {
+    "symbol": "BORG",
+    "name": "SwissBorg Token",
+    "mint": "3dQTr7ror2QPKQ3GbBCokJUmjErGg8kTJzdnYjNfvi3Z",
+    "decimals": 9,
+    "switchboard": "3dQTr7ror2QPKQ3GbBCokJUmjErGg8kTJzdnYjNfvi3Z"
+  },
+  {
+    "symbol": "VINE",
+    "name": "Vine Coin",
+    "mint": "6AJcP7wuLwmRYLBNbi825wgguaPsWzPBEHcHndpRpump",
+    "decimals": 9,
+    "switchboard": "6AJcP7wuLwmRYLBNbi825wgguaPsWzPBEHcHndpRpump"
+  },
+  {
+    "symbol": "WCT",
+    "name": "WalletConnect Token",
+    "mint": "WCTk5xWdn5SYg56twGj32sUF3W4WFQ48ogezLBuYTBY",
+    "decimals": 9,
+    "switchboard": "WCTk5xWdn5SYg56twGj32sUF3W4WFQ48ogezLBuYTBY"
+  },
+  {
+    "symbol": "HUMA",
+    "name": "Huma Finance",
+    "mint": "HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw",
+    "decimals": 9,
+    "switchboard": "HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw"
+  },
+  {
+    "symbol": "DBR",
+    "name": "deBridge",
+    "mint": "DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5",
+    "decimals": 9,
+    "switchboard": "DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5"
+  },
+  {
+    "symbol": "HOME",
+    "name": "Home",
+    "mint": "J3umBWqhSjd13sag1E1aUojViWvPYA5dFNyqpKuX3WXj",
+    "decimals": 9,
+    "switchboard": "J3umBWqhSjd13sag1E1aUojViWvPYA5dFNyqpKuX3WXj"
+  },
+  {
+    "symbol": "ROAM",
+    "name": "Roam Token",
+    "mint": "RoamA1USA8xjvpTJZ6RvvxyDRzNh6GCA1zVGKSiMVkn",
+    "decimals": 9,
+    "switchboard": "RoamA1USA8xjvpTJZ6RvvxyDRzNh6GCA1zVGKSiMVkn"
+  },
+  {
+    "symbol": "LAUNCHCOIN",
+    "name": "Launch Coin on Believe",
+    "mint": "Ey59PH7Z4BFU4HjyKnyMdWt5GGN76KazTAwQihoUXRnk",
+    "decimals": 9,
+    "switchboard": "Ey59PH7Z4BFU4HjyKnyMdWt5GGN76KazTAwQihoUXRnk"
+  },
+  {
+    "symbol": "ACT",
+    "name": "Act I : The AI Prophecy",
+    "mint": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump",
+    "decimals": 9,
+    "switchboard": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump"
+  },
+  {
+    "symbol": "BMT",
+    "name": "Bubblemaps",
+    "mint": "FQgtfugBdpFN7PZ6NdPrZpVLDBrPGxXesi4gVu3vErhY",
+    "decimals": 9,
+    "switchboard": "FQgtfugBdpFN7PZ6NdPrZpVLDBrPGxXesi4gVu3vErhY"
+  },
+  {
+    "symbol": "CHILLGUY",
+    "name": "Just a chill guy",
+    "mint": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump",
+    "decimals": 9,
+    "switchboard": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump"
+  },
+  {
+    "symbol": "CUDIS",
+    "name": "CUDIS",
+    "mint": "CudisfkgWvMKnZ3TWf6iCuHm8pN2ikXhDcWytwz6f6RN",
+    "decimals": 9,
+    "switchboard": "CudisfkgWvMKnZ3TWf6iCuHm8pN2ikXhDcWytwz6f6RN"
+  },
+  {
+    "symbol": "PORTAL",
+    "name": "Portal",
+    "mint": "FMQjDvT1GztVxdvYgMBEde4L54fftFGx9m5GmbqeJGM5",
+    "decimals": 9,
+    "switchboard": "FMQjDvT1GztVxdvYgMBEde4L54fftFGx9m5GmbqeJGM5"
+  },
+  {
+    "symbol": "PRCL",
+    "name": "Parcl",
+    "mint": "4LLbsb5ReP3yEtYzmXewyGjcir5uXtKFURtaEUVC2AHs",
+    "decimals": 9,
+    "switchboard": "4LLbsb5ReP3yEtYzmXewyGjcir5uXtKFURtaEUVC2AHs"
+  },
+  {
+    "symbol": "DOOD",
+    "name": "Doodles",
+    "mint": "DvjbEsdca43oQcw2h3HW1CT7N3x5vRcr3QrvTUHnXvgV",
+    "decimals": 9,
+    "switchboard": "DvjbEsdca43oQcw2h3HW1CT7N3x5vRcr3QrvTUHnXvgV"
+  },
+  {
+    "symbol": "GRIFFAIN",
+    "name": "test griffain.com",
+    "mint": "KENJSUYLASHUMfHyy5o4Hp2FdNqZg1AsUPhfH2kYvEP",
+    "decimals": 9,
+    "switchboard": "KENJSUYLASHUMfHyy5o4Hp2FdNqZg1AsUPhfH2kYvEP"
+  },
+  {
+    "symbol": "CAT",
+    "name": "cat in a dogs world",
+    "mint": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5",
+    "decimals": 9,
+    "switchboard": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5"
+  },
+  {
+    "symbol": "BAN",
+    "name": "Comedian",
+    "mint": "9PR7nCP9DpcUotnDPVLUBUZKu5WAYkwrCUx9wDnSpump",
+    "decimals": 9,
+    "switchboard": "9PR7nCP9DpcUotnDPVLUBUZKu5WAYkwrCUx9wDnSpump"
+  },
+  {
+    "symbol": "PONKE",
+    "name": "PONKE",
+    "mint": "5z3EqYQo9HiCEs3R84RCDMu2n7anpDMxRhdK8PSWmrRC",
+    "decimals": 9,
+    "switchboard": "5z3EqYQo9HiCEs3R84RCDMu2n7anpDMxRhdK8PSWmrRC"
+  },
+  {
+    "symbol": "AVA",
+    "name": "Ava AI",
+    "mint": "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump",
+    "decimals": 9,
+    "switchboard": "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump"
+  },
+  {
+    "symbol": "TNSR",
+    "name": "Tensor",
+    "mint": "TNSRxcUxoT9xBG3de7PiJyTDYu7kskLqcpddxnEJAS6",
+    "decimals": 9,
+    "pyth_account": "9TSGDwcPQX4JpAvZbu2Wp5b68wSYkQvHCvfeBjYcCyC",
+    "switchboard": "TNSRxcUxoT9xBG3de7PiJyTDYu7kskLqcpddxnEJAS6"
+  },
+  {
+    "symbol": "ELON",
+    "name": "Moby AI",
+    "mint": "Cy1GS2FqefgaMbi45UunrUzin1rfEmTUYnomddzBpump",
+    "decimals": 9,
+    "switchboard": "Cy1GS2FqefgaMbi45UunrUzin1rfEmTUYnomddzBpump"
+  },
+  {
+    "symbol": "ICE",
+    "name": "MORI COIN",
+    "mint": "8ZHE4ow1a2jjxuoMfyExuNamQNALv5ekZhsBn5nMDf5e",
+    "decimals": 9,
+    "switchboard": "8ZHE4ow1a2jjxuoMfyExuNamQNALv5ekZhsBn5nMDf5e"
+  },
+  {
+    "symbol": "MOBY",
+    "name": "Verse World",
+    "mint": "vRseBFqTy9QLmmo5qGiwo74AVpdqqMTnxPqWoWMpump",
+    "decimals": 9,
+    "switchboard": "vRseBFqTy9QLmmo5qGiwo74AVpdqqMTnxPqWoWMpump"
+  },
+  {
+    "symbol": "ORBS",
+    "name": "zerebro",
+    "mint": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+    "decimals": 9,
+    "switchboard": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn"
+  },
+  {
+    "symbol": "MORI",
+    "name": "The Spellcaster",
+    "mint": "8zrgK9eADL7fc5GSn8seJ4n9E22bn5a4o5JiAptVpump",
+    "decimals": 9,
+    "switchboard": "8zrgK9eADL7fc5GSn8seJ4n9E22bn5a4o5JiAptVpump"
+  },
+  {
+    "symbol": "ZEREBRO",
+    "name": "Audius (Portal)",
+    "mint": "9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM",
+    "decimals": 9,
+    "switchboard": "9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM"
+  },
+  {
+    "symbol": "SPELL",
+    "name": "Ava AI",
+    "mint": "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump",
+    "decimals": 9,
+    "switchboard": "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump"
+  },
+  {
+    "symbol": "USTC",
+    "name": "swarms",
+    "mint": "74SBV4zDXxTRgv1pEMoECskKBkZHc2yGPnc7GYVepump",
+    "decimals": 9,
+    "switchboard": "74SBV4zDXxTRgv1pEMoECskKBkZHc2yGPnc7GYVepump"
+  },
+  {
+    "symbol": "AUDIO",
+    "name": "jelly-my-jelly",
+    "mint": "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump",
+    "decimals": 9,
+    "switchboard": "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump"
+  },
+  {
+    "symbol": "AVA",
+    "name": "SLERF",
+    "mint": "7BgBvyjrZX1YKz4oh9mjb8ZScatkkwb8DzFx7LoiVkM3",
+    "decimals": 9,
+    "switchboard": "7BgBvyjrZX1YKz4oh9mjb8ZScatkkwb8DzFx7LoiVkM3"
+  },
+  {
+    "symbol": "SWARMS",
+    "name": "Unicorn Fart Dust",
+    "mint": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump",
+    "decimals": 9,
+    "switchboard": "eL5fUxj2J4CiQsmW85k5FG9DvuQjjUoBHoQBi2Kpump"
+  },
+  {
+    "symbol": "SLERF",
+    "name": "Hosico cat",
+    "mint": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk",
+    "decimals": 9,
+    "switchboard": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk"
+  },
+  {
+    "symbol": "UFD",
+    "name": "Wen",
+    "mint": "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk",
+    "decimals": 9,
+    "switchboard": "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk"
+  },
+  {
+    "symbol": "WEN",
+    "name": "FWOG",
+    "mint": "A8C3xuqscfmyLrte3VmTqrAq8kgMASius9AFNANwpump",
+    "decimals": 9,
+    "pyth_account": "CsG7wXoqZKNxx4UnFtvozfwXQ9RgpKe7zSJa4LWh5MT9",
+    "switchboard": "A8C3xuqscfmyLrte3VmTqrAq8kgMASius9AFNANwpump"
+  },
+  {
+    "symbol": "EDJI6930",
+    "name": "degod",
+    "mint": "degod39zqQWzpG6h4b7SJLLTCFE6FeZnZD8BwHBFxaN",
+    "decimals": 9,
+    "switchboard": "degod39zqQWzpG6h4b7SJLLTCFE6FeZnZD8BwHBFxaN"
+  },
+  {
+    "symbol": "DEP",
+    "name": "Myro",
+    "mint": "HhJpBhRRn4g56VsyLuT8DL5Bv31HkXqsrahTTUCZeZg4",
+    "decimals": 9,
+    "switchboard": "HhJpBhRRn4g56VsyLuT8DL5Bv31HkXqsrahTTUCZeZg4"
+  },
+  {
+    "symbol": "FWOG",
+    "name": "RIFT AI",
+    "mint": "jUpa2aDCzvdR9EF4fqDXmuyMUkonPTohphABLmRkRFj",
+    "decimals": 9,
+    "switchboard": "jUpa2aDCzvdR9EF4fqDXmuyMUkonPTohphABLmRkRFj"
+  },
+  {
+    "symbol": "DEGO",
+    "name": "Star Atlas DAO",
+    "mint": "poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk",
+    "decimals": 9,
+    "switchboard": "poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk"
+  },
+  {
+    "symbol": "DAO",
+    "name": "Startup",
+    "mint": "97PVGU2DzFqsAWaYU17ZBqGvQFmkqtdMywYBNPAfy8vy",
+    "decimals": 9,
+    "switchboard": "97PVGU2DzFqsAWaYU17ZBqGvQFmkqtdMywYBNPAfy8vy"
+  },
+  {
+    "symbol": "RIO",
+    "name": "RETARDIO",
+    "mint": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx",
+    "decimals": 9,
+    "switchboard": "6ogzHhzdrQr9Pgv6hZ2MNze7UrzBMAFyBBWUYp1Fhitx"
+  },
+  {
+    "symbol": "STARTUP",
+    "name": "Bertram The Pomeranian",
+    "mint": "HgBRWfYxEfvPhtqkaeymCQtHCrKE46qQ43pKe8HCpump",
+    "decimals": 9,
+    "switchboard": "HgBRWfYxEfvPhtqkaeymCQtHCrKE46qQ43pKe8HCpump"
+  },
+  {
+    "symbol": "BERT",
+    "name": "HeyAnon",
+    "mint": "9McvH6w97oewLmPxqQEoHUAv3u5iYMyQ9AeZZhguYf1T",
+    "decimals": 9,
+    "switchboard": "9McvH6w97oewLmPxqQEoHUAv3u5iYMyQ9AeZZhguYf1T"
+  },
+  {
+    "symbol": "ALI",
+    "name": "Access Protocol",
+    "mint": "5MAYDfq5yxtudAhtfyuMBuHZjgAbaS9tbEyEQYAhDS5y",
+    "decimals": 9,
+    "switchboard": "5MAYDfq5yxtudAhtfyuMBuHZjgAbaS9tbEyEQYAhDS5y"
+  },
+  {
+    "symbol": "BRISE",
+    "name": "AI Rig Complex",
+    "mint": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump",
+    "decimals": 9,
+    "switchboard": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump"
+  },
+  {
+    "symbol": "ACS",
+    "name": "Purple Pepe",
+    "mint": "HBoNJ5v8g71s2boRivrHnfSB5MVPLDHHyVjruPfhGkvL",
+    "decimals": 9,
+    "switchboard": "HBoNJ5v8g71s2boRivrHnfSB5MVPLDHHyVjruPfhGkvL"
+  },
+  {
+    "symbol": "WOJAK",
+    "name": "Star Atlas",
+    "mint": "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx",
+    "decimals": 9,
+    "switchboard": "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx"
+  },
+  {
+    "symbol": "A47",
+    "name": "Blockasset",
+    "mint": "NFTUkR4u7wKxy9QLaX2TGvd9oZSWoMo4jqSJqdMb7Nk",
+    "decimals": 9,
+    "switchboard": "NFTUkR4u7wKxy9QLaX2TGvd9oZSWoMo4jqSJqdMb7Nk"
+  },
+  {
+    "symbol": "ATLAS",
+    "name": "Neon EVM",
+    "mint": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+    "decimals": 9,
+    "switchboard": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44"
+  },
+  {
+    "symbol": "RBNT",
+    "name": "XNET Mobile",
+    "mint": "xNETbUB7cRb3AAu2pNG2pUwQcJ2BHcktfvSB8x1Pq6L",
+    "decimals": 9,
+    "switchboard": "xNETbUB7cRb3AAu2pNG2pUwQcJ2BHcktfvSB8x1Pq6L"
+  },
+  {
+    "symbol": "NEON",
+    "name": "Nosana",
+    "mint": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7",
+    "decimals": 9,
+    "pyth_account": "F2VfCymdNQiCa8Vyg5E7BwEv9UPwfm8cVN6eqQLqXiGo",
+    "switchboard": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7"
+  },
+  {
+    "symbol": "KOKOK",
+    "name": "GST",
+    "mint": "AFbX8oGjGpmVFywbVouvhQSRmiW2aR1mohfahi4Y2AdB",
+    "decimals": 9,
+    "switchboard": "AFbX8oGjGpmVFywbVouvhQSRmiW2aR1mohfahi4Y2AdB"
+  },
+  {
+    "symbol": "GST",
+    "name": "Star Atlas DAO",
+    "mint": "poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk",
+    "decimals": 9,
+    "switchboard": "poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk"
+  },
+  {
+    "symbol": "FARTBOY",
+    "name": "Geodnet Token",
+    "mint": "7JA5eZdCzztSfQbJvS8aVVxMFfd81Rs9VvwnocV1mKHu",
+    "decimals": 9,
+    "switchboard": "7JA5eZdCzztSfQbJvS8aVVxMFfd81Rs9VvwnocV1mKHu"
+  },
+  {
+    "symbol": "OLAS",
+    "name": "Hyperpigmentation",
+    "mint": "Aq8Gocyvyyi8xk5EYxd6viUfVmVvs9T9R6mZFzZFpump",
+    "decimals": 9,
+    "switchboard": "Aq8Gocyvyyi8xk5EYxd6viUfVmVvs9T9R6mZFzZFpump"
+  },
+  {
+    "symbol": "HYPER",
+    "name": "PUPS WORLD PEACE",
+    "mint": "2oGLxYuNBJRcepT1mEV6KnETaLD7Bf6qq3CM6skasBfe",
+    "decimals": 9,
+    "switchboard": "2oGLxYuNBJRcepT1mEV6KnETaLD7Bf6qq3CM6skasBfe"
+  },
+  {
+    "symbol": "PRQ",
+    "name": "CROWN Token",
+    "mint": "GDfnEsia2WLAW5t8yx2X5j2mkfA74i5kwGdDuZHt7XmG",
+    "decimals": 9,
+    "switchboard": "GDfnEsia2WLAW5t8yx2X5j2mkfA74i5kwGdDuZHt7XmG"
+  },
+  {
+    "symbol": "MCDULL",
+    "name": "Keep Gambling",
+    "mint": "4ZDFnVXL2ED9htVnLTNMwCwVttp8TbBJcwzFePZwpump",
+    "decimals": 9,
+    "switchboard": "4ZDFnVXL2ED9htVnLTNMwCwVttp8TbBJcwzFePZwpump"
+  },
+  {
+    "symbol": "KEEP",
+    "name": "Solend",
+    "mint": "SLNDpmoWTVADgEdndyvWzroNL7zSi1dF9PC3xHGtPwp",
+    "decimals": 9,
+    "switchboard": "SLNDpmoWTVADgEdndyvWzroNL7zSi1dF9PC3xHGtPwp"
+  },
+  {
+    "symbol": "SLND",
+    "name": "Solend",
+    "mint": "SLNDpmoWTVADgEdndyvWzroNL7zSi1dF9PC3xHGtPwp",
+    "decimals": 9,
+    "switchboard": "SLNDpmoWTVADgEdndyvWzroNL7zSi1dF9PC3xHGtPwp"
   }
 ]

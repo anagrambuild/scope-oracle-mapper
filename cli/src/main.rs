@@ -73,6 +73,8 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 struct MintMappingInput {
+    symbol: String,
+    name: String,
     mint: String,
     decimals: u8,
     #[serde(default)]
@@ -86,9 +88,10 @@ struct MintMappingInput {
 fn setup_rpc_and_program() -> (RpcClient, Keypair, Pubkey, Pubkey, u8) {
     let rpc = RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let fee_payer = Keypair::read_from_file("fee-payer.json").unwrap();
+    let fee_payer = Keypair::read_from_file("cli/fee-payer.json").unwrap();
 
     let program_id = Pubkey::from(scope_mapping::ID);
+    println!("program_id: {:?}", program_id);
 
     let (state_pda, bump) = Pubkey::find_program_address(
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
@@ -252,6 +255,7 @@ fn process_mint_mapping(
         rpc.get_latest_blockhash().unwrap(),
     )
     .unwrap();
+    println!("Adding mapping: {:?}", mapping.symbol + " " + &mapping.name);
     let tx = VersionedTransaction::try_new(VersionedMessage::V0(msg), &[fee_payer]).unwrap();
     let result = rpc.send_and_confirm_transaction(&tx);
     println!("result: {:?}", result);
@@ -311,6 +315,8 @@ fn main() {
                 let mint = mint.expect("--mint is required");
                 let decimals = decimals.expect("--decimals is required");
                 let mapping = MintMappingInput {
+                    symbol: "".to_string(),
+                    name: "".to_string(),
                     mint,
                     decimals,
                     scope_details: None,
