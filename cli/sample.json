@@ -46,7 +46,7 @@
     "name": "dogwifhat",
     "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
     "decimals": 9,
-    "scope_details": [462, 65535, 65535],
+    "scope_details": [462, 0, 65535],
     "pyth_account": "6B23K3tkb51vLZA14jcEQVCA1pfHptzEHFA93V5dYwbT",
     "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
   },
@@ -102,7 +102,7 @@
     "name": "ai16z",
     "mint": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
     "decimals": 9,
-    "scope_details": [95, 65535, 65535],
+    "scope_details": [95, 0, 65535],
     "pyth_account": "BxizdE1Rd9yeCXUaorGNGLc4qHbqBULxiBtjRX37HjSV",
     "switchboard": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC"
   },
@@ -129,7 +129,7 @@
     "name": "Render Token",
     "mint": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof",
     "decimals": 9,
-    "scope_details": [450, 65535, 65535],
+    "scope_details": [450, 0, 65535],
     "pyth_account": "HAm5DZhrgrWa12heKSxocQRyJWGCtXegC77hFQ8F5QTH",
     "switchboard": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof"
   },
@@ -146,7 +146,7 @@
     "name": "SPX6900 (Wormhole)",
     "mint": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr",
     "decimals": 9,
-    "scope_details": [93, 65535, 65535],
+    "scope_details": [93, 0, 65535],
     "switchboard": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr"
   },
   {
@@ -170,7 +170,7 @@
     "name": "Jito Staked SOL",
     "mint": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn",
     "decimals": 9,
-    "scope_details": [146, 65535, 65535],
+    "scope_details": [51, 0, 65535],
     "pyth_account": "AxaxyeDT8JnWERSaTKvFXvPKkEdxnamKSqpWbsSjYg1g",
     "switchboard": "J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn"
   },
@@ -186,7 +186,7 @@
     "name": "BOOK OF MEME",
     "mint": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
     "decimals": 9,
-    "scope_details": [409, 65535, 65535],
+    "scope_details": [409, 0, 65535],
     "switchboard": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82"
   },
   {
@@ -256,16 +256,15 @@
     "name": "Drift Staked SOL",
     "mint": "Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ",
     "decimals": 9,
-    "scope_details": [452, 65535, 65535],
+    "scope_details": [453, 65535, 65535],
     "switchboard": "Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ"
   },
   {
-    "symbol": "IO",
-    "name": "IO",
-    "mint": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K",
-    "decimals": 9,
-    "scope_details": [412, 65535, 65535],
-    "switchboard": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K"
+    "symbol": "IOT",
+    "name": "Helium IOT",
+    "mint": "iotEVVZLEywoTn1QdwNPddxPWszn3zFhEot3MfL9fns",
+    "decimals": 6,
+    "scope_details": [412, 65535, 65535]
   },
   {
     "symbol": "GRASS",
@@ -405,7 +404,7 @@
     "name": "GIGACHAD",
     "mint": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
     "decimals": 9,
-    "scope_details": [471, 65535, 65535],
+    "scope_details": [471, 0, 65535],
     "switchboard": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9"
   },
   {
@@ -697,7 +696,7 @@
     "switchboard": "9wK8yN6iz1ie5kEJkvZCTxyN1x5sTdNfx8yeMY8Ebonk"
   },
   {
-    "symbol": "UFD",
+    "symbol": "WEN",
     "name": "Wen",
     "mint": "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk",
     "decimals": 9,
@@ -803,26 +802,11 @@
     "switchboard": "NFTUkR4u7wKxy9QLaX2TGvd9oZSWoMo4jqSJqdMb7Nk"
   },
   {
-    "symbol": "ATLAS",
-    "name": "Neon EVM",
-    "mint": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
-    "decimals": 9,
-    "switchboard": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44"
-  },
-  {
     "symbol": "RBNT",
     "name": "XNET Mobile",
     "mint": "xNETbUB7cRb3AAu2pNG2pUwQcJ2BHcktfvSB8x1Pq6L",
     "decimals": 9,
     "switchboard": "xNETbUB7cRb3AAu2pNG2pUwQcJ2BHcktfvSB8x1Pq6L"
-  },
-  {
-    "symbol": "NEON",
-    "name": "Nosana",
-    "mint": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7",
-    "decimals": 9,
-    "pyth_account": "F2VfCymdNQiCa8Vyg5E7BwEv9UPwfm8cVN6eqQLqXiGo",
-    "switchboard": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7"
   },
   {
     "symbol": "KOKOK",
