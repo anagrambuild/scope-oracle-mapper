@@ -9,4 +9,4 @@ extern crate std;
 pub mod instruction;
 pub use oracle_mapping_state as state;
 
-pinocchio_pubkey::declare_id!("BQcXy46QavS1AJM1apFQSshsHZpMfQ8PAVkABJtW4tTG");
+pinocchio_pubkey::declare_id!("FeDgnLZMJZtq8HzmHc9CLg8YPztDMNyDsZru1Qw3Z19J");

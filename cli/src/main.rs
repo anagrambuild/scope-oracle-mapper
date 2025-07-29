@@ -308,7 +308,9 @@ fn main() {
                     serde_json::from_reader(file).expect("Invalid JSON");
                 for mapping in mappings {
                     println!("Processing mapping: {:?}", mapping);
-                    process_mint_mapping(&rpc, &fee_payer, program_id, state_pda, mapping);
+                    if mapping.scope_details.is_some() || mapping.pyth_account.is_some() {
+                        process_mint_mapping(&rpc, &fee_payer, program_id, state_pda, mapping);
+                    }
                 }
             } else {
                 // Single mapping from CLI args

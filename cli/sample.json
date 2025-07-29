@@ -46,7 +46,7 @@
     "name": "dogwifhat",
     "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
     "decimals": 9,
-    "scope_details": [462, 0, 65535],
+    "scope_details": [462, 65535, 65535],
     "pyth_account": "6B23K3tkb51vLZA14jcEQVCA1pfHptzEHFA93V5dYwbT",
     "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
   },
@@ -222,15 +222,6 @@
     "switchboard": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump"
   },
   {
-    "symbol": "W",
-    "name": "dogwifhat",
-    "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
-    "decimals": 9,
-    "scope_details": [358, 65535, 65535],
-    "pyth_account": "BEMsCSQEGi2kwPA4mKnGjxnreijhMki7L4eeb96ypzF9",
-    "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
-  },
-  {
     "symbol": "COMP",
     "name": "Ani Grok Companion",
     "mint": "9tqjeRS1swj36Ee5C1iGiwAxjQJNGAVCzaTLwFY8bonk",
@@ -361,13 +352,6 @@
     "scope_details": [23, 65535, 65535],
     "pyth_account": "4CBshVeNBEXz24GZpoj8SrqP5L7VGG3qjGd6tCST1pND",
     "switchboard": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE"
-  },
-  {
-    "symbol": "DOG",
-    "name": "dogwifhat",
-    "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
-    "decimals": 9,
-    "switchboard": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
   },
   {
     "symbol": "HNT",
