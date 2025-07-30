@@ -12,6 +12,8 @@ use crate::{error::MappingProgramError, mint_mapping::MintMapping};
 
 pub const MAX_MAPPINGS: u16 = 512;
 
+pub const SCOPE_MAPPING_ADDRESS: &str = "Bx76evtFL2ZNeJwrdeysLtPiJDeu3dQ8ZVxVcR3kuWF9";
+
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, shank::ShankAccount)]
 pub struct ScopeMappingRegistry {

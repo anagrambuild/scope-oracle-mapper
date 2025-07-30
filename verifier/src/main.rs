@@ -1,5 +1,5 @@
 use anyhow::Result;
-use oracle_mapping_state::{DataLen, MintMapping, ScopeMappingRegistry};
+use oracle_mapping_state::{DataLen, MintMapping, ScopeMappingRegistry, SCOPE_MAPPING_ADDRESS};
 use scope_mapping::ID as scope_mapping_id;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -30,12 +30,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let rpc = RpcClient::new("https://api.devnet.solana.com".to_string());
 
-    let mapping_pda = Pubkey::from_str("Bx76evtFL2ZNeJwrdeysLtPiJDeu3dQ8ZVxVcR3kuWF9").unwrap();
+    let mapping_pda = Pubkey::from_str(SCOPE_MAPPING_ADDRESS).unwrap();
     let mapping_data = rpc.get_account(&mapping_pda).unwrap().data;
 
     let rpc_mainnet = RpcClient::new("https://api.mainnet-beta.solana.com".to_string());
     let scope_account = rpc_mainnet
-        .get_account(&Pubkey::from_str("3NJYftD5sjVfxSnUdZ1wVML8f3aC6mp1CXCL6L7TnU8C").unwrap())
+        .get_account(&Pubkey::from(scope_mapping::ID))
         .unwrap();
     let scope_data = scope_account.data;
 
