@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand};
-use scope_mapping::{
+use oracle_mapping::{
     instruction::{AddMappingIxData, InitializeRegistryIxData, IntoBytes},
     state::{DataLen, MintMapping, ScopeMappingRegistry},
 };
@@ -90,7 +90,7 @@ fn setup_rpc_and_program() -> (RpcClient, Keypair, Pubkey, Pubkey, u8) {
 
     let fee_payer = Keypair::read_from_file("cli/fee-payer.json").unwrap();
 
-    let program_id = Pubkey::from(scope_mapping::ID);
+    let program_id = Pubkey::from(oracle_mapping::ID);
     println!("program_id: {:?}", program_id);
 
     let (state_pda, bump) = Pubkey::find_program_address(
@@ -107,7 +107,7 @@ fn create_close_mapping_ix(
     mint: [u8; 32],
     bump: u8,
 ) -> Instruction {
-    use scope_mapping::instruction::CloseMappingIxData;
+    use oracle_mapping::instruction::CloseMappingIxData;
     let close_mapping_ix_data = CloseMappingIxData { mint, bump };
     let mut ix_data_with_discriminator = vec![2];
     ix_data_with_discriminator.extend_from_slice(close_mapping_ix_data.into_bytes().unwrap());

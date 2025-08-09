@@ -1,5 +1,5 @@
 use litesvm::LiteSVM;
-use scope_mapping::{
+use oracle_mapping::{
     instruction::{AddMappingIxData, InitializeRegistryIxData, IntoBytes},
     state::{DataLen, MintMapping, ScopeMappingRegistry},
 };
@@ -21,8 +21,8 @@ fn setup_svm_and_program() -> (LiteSVM, Keypair, Pubkey, Pubkey, u8) {
 
     svm.airdrop(&fee_payer.pubkey(), 100000000).unwrap();
 
-    let program_id = Pubkey::from(scope_mapping::ID);
-    svm.add_program_from_file(program_id, "../target/deploy/scope_mapping.so")
+    let program_id = Pubkey::from(oracle_mapping::ID);
+    svm.add_program_from_file(program_id, "../target/deploy/oracle_mapping.so")
         .unwrap();
     let (state_pda, bump) = Pubkey::find_program_address(
         &[b"ScopeMappingRegistry", fee_payer.pubkey().as_ref()],
@@ -83,7 +83,7 @@ fn create_close_mapping_ix(
     mint: [u8; 32],
     bump: u8,
 ) -> Instruction {
-    use scope_mapping::instruction::CloseMappingIxData;
+    use oracle_mapping::instruction::CloseMappingIxData;
     let close_mapping_ix_data = CloseMappingIxData { mint, bump };
     let mut ix_data_with_discriminator = vec![2];
     ix_data_with_discriminator.extend_from_slice(close_mapping_ix_data.into_bytes().unwrap());
