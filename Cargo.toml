@@ -3,7 +3,8 @@ resolver = "2"
 members = [
     "program",
     "state",
-    "cli", "verifier",
+    "cli", 
+    "verifier",
 ]
 
 [workspace.package]

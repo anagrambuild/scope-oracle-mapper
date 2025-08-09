@@ -1,5 +1,5 @@
 [package]
-name = "verifier"
+name = "oracle-mapping-verifier"
 edition = "2021"
 version.workspace = true
 
